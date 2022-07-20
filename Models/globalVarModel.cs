@@ -8,6 +8,6 @@ namespace Models
 {
     public static class globalVar
     {
-        public static string db { get; set; }
+        public static string cnn { get; set; }
     }
 }

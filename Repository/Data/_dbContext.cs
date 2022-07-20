@@ -22,7 +22,7 @@ namespace Repository.Data
             string conexion = configurationFile.GetConnectionString("db");
             */
 
-            string conexion = globalVar.db;
+            string conexion = globalVar.cnn;
             optionsBuilder.UseSqlServer(connectionString: conexion);
         }
         #endregion
