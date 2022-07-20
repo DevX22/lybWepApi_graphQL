@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ string _MyCoors = "SysLyb";
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//dbconfig
+globalVar.db = builder.Configuration["ConnectionStrings:db"];
 
 //coors
 builder.Services.AddCors(options =>
