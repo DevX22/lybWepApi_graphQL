@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("tipoMedida")]
+    [Table("tipoMedida",Schema ="dbo")]
     public class tipoMedidaModel
     {
         [Key]

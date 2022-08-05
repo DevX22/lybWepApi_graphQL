@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -32,9 +31,5 @@ namespace Models
 
         [ForeignKey("id_origen")]
         public virtual origenModel Origen { get; set; }
-
-        [ForeignKey("id_destino")]
-        public virtual destinoModel Destino { get; set; }
-
     }
 }

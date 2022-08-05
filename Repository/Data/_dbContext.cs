@@ -16,10 +16,11 @@ namespace Repository.Data
         {
             /*
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder = configurationBuilder.AddJsonFile("secrets.json");
+            configurationBuilder = configurationBuilder.AddJsonFile("appsettings.json");
 
             IConfiguration configurationFile = configurationBuilder.Build();
-            string conexion = configurationFile.GetConnectionString("db");
+            string conexion = configurationFile.GetConnectionString("conexion");
+            optionsBuilder.UseSqlServer(connectionString: conexion);
             */
 
             string conexion = globalVar.cnn;
@@ -31,5 +32,6 @@ namespace Repository.Data
         public DbSet<clienteModel> cliente { get; set; }
         public DbSet<personaModel> persona { get; set; }
         public DbSet<tipoDocumentoModel> tipodocumento { get; set; }
+        public DbSet<tipoMedidaModel> tipoMedida { get; set; }
     }
 }

@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using Models.mapperConfig;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +13,13 @@ string _MyCoors = "SysLyb";
 
 builder.Services.AddControllers();
 
-//dbconfig
-globalVar.db = builder.Configuration["ConnectionStrings:db"];
+//dbconfig and jwt
+globalVar.Go(builder.Configuration);
+
+//mapper config
+IMapper mapper = mappConfig.registerMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //coors
 builder.Services.AddCors(options =>
