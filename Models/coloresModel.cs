@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("color")]
-    public class colorModel
+    [Table("colores")]
+    public class coloresModel
     {
         [Key]
         public int id { get; set; }
-        public string colorNombre { get; set; }
-        public string colorCodigo { get; set; }
+        public string colorName { get; set; }
+        public string colorCode { get; set; }
     }
 }

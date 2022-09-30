@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
-using Repository.Data;
 using Repository.genericRepository;
 using System;
 using System.Collections.Generic;
@@ -10,23 +9,25 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class clienteRepository : genericRepository<clienteModel>, IDisposable
+    public class usuarioRepository : genericRepository<usuarioModel>, IDisposable
     {
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
-        public List<clienteModel> listDetaild()
+
+        public List<usuarioModel> listDetaild()
         {
-            List<clienteModel> response=_db.cliente
-                .Include(x=>x.persona).ToList();
+            List<usuarioModel> response = _db.usuario
+                .Include(x => x.persona)
+                .Include(x => x.rolUser).ToList();
             return response;
         }
 
-        public bool existsCliente(string usser)
+        public bool existsUsuario(string usser)
         {
-            clienteModel response = _db.cliente.Where(x => x.usser == usser.Trim()).FirstOrDefault();
-            if(response == null || response.usser == "")
+            usuarioModel response = _db.usuario.Where(x => x.usser == usser.Trim()).FirstOrDefault();
+            if (response == null || response.usser == "")
             {
                 return false;
             }

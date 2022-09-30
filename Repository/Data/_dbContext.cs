@@ -28,10 +28,24 @@ namespace Repository.Data
         }
         #endregion
 
+        //cliente
         public DbSet<avatarModel> avatar { get; set; }
         public DbSet<clienteModel> cliente { get; set; }
+        //dato
         public DbSet<personaModel> persona { get; set; }
         public DbSet<tipoDocumentoModel> tipodocumento { get; set; }
+        //usuario
+        public DbSet<usuarioModel> usuario { get; set; }
+        public DbSet<rolUsuarioModel> rolUsuario { get; set; }
+        //producto
         public DbSet<tipoMedidaModel> tipoMedida { get; set; }
+        public DbSet<categoriaModel> categoria { get; set; }
+        public DbSet<imgProductoModel> imgProducto { get; set; }
+        public DbSet<inventarioModel> inventario { get; set; }
+        public DbSet<colorProductoModel> colorProducto { get; set; }
+        public DbSet<tallaProductoModel> tallaProducto { get; set; }
+        public DbSet<tallaColorModel> tallaColor { get; set; }
+        public DbSet<coloresModel> colores { get; set; }
+
     }
 }

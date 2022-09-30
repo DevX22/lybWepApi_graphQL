@@ -7,17 +7,17 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class clienteController : ControllerBase
+    public class rolUserController : ControllerBase
     {
-        private readonly clienteLogic _logic = new clienteLogic();
+        private readonly rolUserLogic _logic = new rolUserLogic();
 
         [HttpGet("list")]
         public IActionResult get()
         {
             try
             {
-                List<clienteModel> response = _logic.listDetaild();
-                if (response == null)
+                List<rolUsuarioModel> response = _logic.GetAll();
+                if(response == null)
                 {
                     return NotFound(response);
                 }
@@ -25,36 +25,39 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
 
         [HttpPost("create")]
-        public IActionResult post([FromBody]clienteModel request)
+        public IActionResult post([FromBody] rolUsuarioModel resquest)
         {
             try
             {
-                bool response = _logic.Create(request);
-                return Ok(response);
+                rolUsuarioModel request = _logic.Create(resquest);
+                if (request.id == 0 || request.id==null)
+                {
+                    return NotFound(false);
+                }
+                return Ok(true);
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
-        [HttpPost("exists")]
-        public IActionResult post([FromBody] string usser)
+
+        [HttpPut("update")]
+        public IActionResult put([FromBody] rolUsuarioModel request)
         {
             try
             {
-                bool exists = _logic.existsCliente(usser);
-                return Ok(exists);
+                rolUsuarioModel response = _logic.Update(request);
+                return Ok(true);
             }
             catch (Exception ex)
             {
-                throw;
+                return NotFound(false);
             }
         }
     }

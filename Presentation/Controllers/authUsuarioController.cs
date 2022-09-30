@@ -6,19 +6,19 @@ using Models.response;
 
 namespace Presentation.Controllers
 {
-    [Route("api/cliente")]
+    [Route("api/usuario")]
     [ApiController]
-    public class authClienteController : ControllerBase
+    public class authUsuarioController : ControllerBase
     {
-        private readonly authClienteLogic _logic = new authClienteLogic();
+        private readonly authUsuarioLogic _logic = new authUsuarioLogic();
 
         [HttpPost("auth")]
-        public IActionResult post([FromBody] authRequestModel resquest)
+        public IActionResult post([FromBody] authRequestModel request)
         {
             try
             {
-                loginResponse response = _logic.authCliente(resquest);
-                if (response.token == null)
+                loginResponse response = _logic.authUsuario(request);
+                if (response.token == null || response.token == "")
                 {
                     return NotFound("Usuario o Contraseña Incorrectos");
                 }
@@ -26,6 +26,7 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
+
                 throw;
             }
         }

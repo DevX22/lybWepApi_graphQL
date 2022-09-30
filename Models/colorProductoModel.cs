@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("imgProducto")]
-    public class imgProductoModel
+    [Table("colorProducto")]
+    public class colorProductoModel
     {
         [Key]
-        public int id  { get; set; }
+        public int id { get; set; }
         public int id_producto { get; set; }
-        public string nombreImg { get; set; }
-        public string img { get; set; }
+        public int stock { get; set; }
+        public string colorName { get; set; }
+        public string colorCode { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]
-        public virtual productoModel? Producto { get; set; }
+        public virtual productoModel? producto { get; set; }
     }
 }

@@ -2,45 +2,44 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.dto;
 
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class clienteController : ControllerBase
+    public class usuarioController : ControllerBase
     {
-        private readonly clienteLogic _logic = new clienteLogic();
+        private readonly usuarioLogic _logic = new usuarioLogic();
 
         [HttpGet("list")]
         public IActionResult get()
         {
             try
             {
-                List<clienteModel> response = _logic.listDetaild();
+                List<usuarioDto> response = _logic.listDetaild();
                 if (response == null)
                 {
-                    return NotFound(response);
+                    return NotFound();
                 }
                 return Ok(response);
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
 
         [HttpPost("create")]
-        public IActionResult post([FromBody]clienteModel request)
+        public IActionResult post([FromBody] usuarioModel request)
         {
             try
             {
-                bool response = _logic.Create(request);
-                return Ok(response);
+                bool success = _logic.Create(request);
+                return Ok(success);
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -49,7 +48,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                bool exists = _logic.existsCliente(usser);
+                bool exists = _logic.existsUsuario(usser);
                 return Ok(exists);
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using Repository.Data;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,41 @@ namespace Repository.genericRepository
                 //throw exx;
             }
         }
+        public virtual async Task<List<TEntity>> GetAllAsync()
+        {
+            try
+            {
+                IQueryable<TEntity> query = _dbSet;
+                return await query.ToListAsync();
 
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                //CustomException exx = new CustomException("Ocurrio un error al obtener toda la lista", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                //throw exx;
+            }
+        }
+        
         public virtual TEntity GetById(object id)
         {
             try
             {
                 return _dbSet.Find(id);
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                //CustomException exx = new CustomException("Ocurrio un error al buscar el registro", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                //throw exx;
+            }
+        }
+
+        public virtual async Task<TEntity> GetByIdAsync(object id)
+        {
+            try
+            {
+                return await _dbSet.FindAsync(id);
             }
             catch (Exception ex)
             {
@@ -63,6 +93,21 @@ namespace Repository.genericRepository
                 //throw exx;
             }
         }
+        public virtual async Task<TEntity> CreateAsync(TEntity entity)
+        {
+            try
+            {
+                await _dbSet.AddAsync(entity);
+                await _db.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                //CustomException exx = new CustomException("Error al registrar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                //throw exx;
+            }
+        }
 
         public virtual TEntity Update(TEntity entity)
         {
@@ -70,6 +115,23 @@ namespace Repository.genericRepository
             {
                 _dbSet.Update(entity);
                 _db.SaveChanges();
+                return entity;
+
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                //CustomException exx = new CustomException("Error al actualizar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                //throw exx;
+            }
+        }
+
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            try
+            {
+                _dbSet.Update(entity);
+                await _db.SaveChangesAsync();
                 return entity;
 
             }
@@ -143,12 +205,42 @@ namespace Repository.genericRepository
                 //throw exx;
             }
         }
+        public virtual async Task<List<TEntity>> insertMultipleAsyc(List<TEntity> lista)
+        {
+            try
+            {
+                _dbSet.AddRangeAsync(lista);
+                _db.SaveChangesAsync();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                //throw exx;
+            }
+        }
         public virtual List<TEntity> updateMultiple(List<TEntity> lista)
         {
             try
             {
                 _dbSet.UpdateRange(lista);
                 _db.SaveChanges();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                //throw exx;
+            }
+        }
+        public virtual async Task<List<TEntity>> updateMultipleAsync(List<TEntity> lista)
+        {
+            try
+            {
+                _dbSet.UpdateRange(lista);
+                _db.SaveChangesAsync();
                 return lista;
             }
             catch (Exception ex)

@@ -28,10 +28,16 @@ namespace Logic
             }
             return true;
         }
+
         public List<clienteModel> listDetaild()
         {
             List<clienteDto> response = _map.Map<List<clienteDto>>(_repo.listDetaild());
             return _map.Map<List<clienteModel>>(response);
+        }
+
+        public bool existsCliente(string usser)
+        {
+            return _repo.existsCliente(usser);
         }
     }
 }
