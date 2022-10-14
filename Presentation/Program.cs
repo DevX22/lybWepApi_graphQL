@@ -1,17 +1,19 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Models;
 using Models.mapperConfig;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text;
+using Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string _MyCoors = "SysLyb";
-
 // Add services to the container.
-
 builder.Services.AddControllers();
+//Config ApiVersioning
+builder.Services.AddConfigApiVersioning();
 
 //dbconfig and jwt
 globalVar.Go(builder.Configuration);
@@ -21,42 +23,15 @@ IMapper mapper = mappConfig.registerMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-//coors
-builder.Services.AddCors(options =>
-{
-    string Cliente = builder.Configuration["ClienteHost"];
-    options.AddPolicy(name: _MyCoors,
-                      builder =>
-                      {
-                          builder.AllowAnyOrigin(); //<= permitir todas las rutas
-                          builder.WithOrigins(Cliente); //<= esto es para host real
-                          //builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
-                          builder.AllowAnyHeader();
-                          builder.AllowAnyMethod();
-                      });
-});
-//jwt
-builder.Services.AddAuthentication(x =>
-{
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
-{
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = true;
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"])),
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"]
-    };
-});
+//cors config
+string _MyCoors = builder.Services.AddConfigCors(builder);
+
+//jwt config
+builder.Services.AddConfigAuthenticationJwt(builder);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddConfigSwaggerGen();
 
 var app = builder.Build();
 
@@ -64,8 +39,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseCustomSwaggerUI();
 }
+
+app.UseRouting();
 
 app.UseHttpsRedirection();
 

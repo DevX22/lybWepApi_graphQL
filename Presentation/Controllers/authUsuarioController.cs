@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -8,6 +9,7 @@ namespace Presentation.Controllers
 {
     [Route("api/usuario")]
     [ApiController]
+    [AllowAnonymous]
     public class authUsuarioController : ControllerBase
     {
         private readonly authUsuarioLogic _logic = new authUsuarioLogic();
@@ -18,9 +20,9 @@ namespace Presentation.Controllers
             try
             {
                 loginResponse response = _logic.authUsuario(request);
-                if (response.token == null || response.token == "")
+                if (!response.success)
                 {
-                    return NotFound("Usuario o Contraseña Incorrectos");
+                    return NotFound(response);
                 }
                 return Ok(response);
             }

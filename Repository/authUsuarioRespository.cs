@@ -26,24 +26,33 @@ namespace Repository
             loginResponse loginResponse = new loginResponse();
             userResponse userResponse = new userResponse();
             userTokenDto userToken = new userTokenDto();
+            if (request == null || request.password == "" || request.user == "")
+            {
+                loginResponse.status = "Datos de ingreso faltantes";
+                return loginResponse;
+            }
             string password = encrypt.SHA256(character.remove(request.password));
             usuarioModel user = _db.usuario
                 .Include(x => x.persona)
                 .Include(x => x.rolUser)
                 .Where(x => x.contrasena == request.user && x.contrasena == password).FirstOrDefault();
-
+            if (user == null)
+            {
+                loginResponse.status = "Datos de ingreso incorrectos";
+                return loginResponse;
+            }
             userResponse = _mapp.Map<usuarioModel, userResponse>(user);
             userToken = _mapp.Map<usuarioModel, userTokenDto>(user);
             loginResponse.user = userResponse;
             if (user.estado == false)
             {
-                return loginResponse;
-            }
-            if (user == null)
-            {
+                loginResponse.success = true;
+                loginResponse.status = "Cuenta desabilitada";
                 return loginResponse;
             }
             loginResponse.token = oToken.getToken(userToken, 15, userResponse.rolUser);
+            loginResponse.success = true;
+            loginResponse.status = $"Bienvenido {user.persona.nombre}";
             return loginResponse;
         }
     }

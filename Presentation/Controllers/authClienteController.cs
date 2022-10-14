@@ -1,13 +1,19 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.response;
+using Tools;
 
 namespace Presentation.Controllers
 {
     [Route("api/cliente")]
+    [Route("api/v{version:apiVersion}/cliente")]
+    [ApiVersion(versionApi.v1)]
     [ApiController]
+    
+    [AllowAnonymous]
     public class authClienteController : ControllerBase
     {
         private readonly authClienteLogic _logic = new authClienteLogic();
@@ -18,9 +24,9 @@ namespace Presentation.Controllers
             try
             {
                 loginResponse response = _logic.authCliente(resquest);
-                if (response.token == null)
+                if (!response.success)
                 {
-                    return NotFound("Usuario o Contraseña Incorrectos");
+                    return NotFound(response);
                 }
                 return Ok(response);
             }

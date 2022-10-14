@@ -1,12 +1,15 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Tools;
 
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class colorProductoController : ControllerBase
     {
         private readonly colorProductoLogic _logic = new colorProductoLogic();
@@ -28,6 +31,7 @@ namespace Presentation.Controllers
                 throw;
             }
         }
+
 
         [HttpPost("inserMultiple")]
         public async Task<IActionResult> post([FromBody] List<colorProductoModel> req)
