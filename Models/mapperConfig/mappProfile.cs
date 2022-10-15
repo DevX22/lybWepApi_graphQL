@@ -25,6 +25,7 @@ namespace Models.mapperConfig
                 .ForMember(d => d.nombreApellido, o => o.MapFrom(m => m.persona.nombre + " " + m.persona.apellidoPaterno));
             CreateMap<usuarioModel, userTokenDto>();
             CreateMap<usuarioModel, usuarioDto>().ReverseMap();
+            CreateMap<productoModel, productoDto>().ReverseMap();
         }
     }
 }

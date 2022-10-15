@@ -46,6 +46,9 @@ namespace Repository.Data
         public DbSet<tallaProductoModel> tallaProducto { get; set; }
         public DbSet<tallaColorModel> tallaColor { get; set; }
         public DbSet<coloresModel> colores { get; set; }
+        public DbSet<productoModel> producto { get; set; }
+        //proveedor
+        public DbSet<proveedorModel> proveedor { get; set; }
 
     }
 }

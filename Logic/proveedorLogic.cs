@@ -1,10 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Models;
-using Models.dto;
-using Models.mapperConfig;
+﻿using Models;
 using Repository;
-using Repository.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class productoLogic : productoRepository<productoModel>
+    public class proveedorLogic : proveedorRepository<proveedorModel>, IDisposable
     {
         public void Dispose()
         {

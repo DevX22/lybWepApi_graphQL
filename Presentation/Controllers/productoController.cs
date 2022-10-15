@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.dto;
 using Newtonsoft.Json.Linq;
 
 namespace Presentation.Controllers
@@ -37,7 +38,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                List<productoModel> res = await _logic.GetAllAsync();
+                List<productoDto> res = await _logic.listAllAsync();
                 return Ok(res);
             }
             catch (Exception)

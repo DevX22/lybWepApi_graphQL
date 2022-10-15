@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.dto;
 
 namespace Presentation.Controllers
 {
@@ -18,7 +19,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                List<clienteModel> response = _logic.listDetaild();
+                List<clienteDto> response = _logic.listDetaild();
                 if (response == null)
                 {
                     return NotFound(response);
