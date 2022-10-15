@@ -19,8 +19,17 @@ namespace Repository
         public async Task<List<productoDto>> listAllAsync()
         {
 
-            List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.ToListAsync());
-            return res;
+            try
+            {
+                List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.ToListAsync());
+                res = res;
+                return res;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
