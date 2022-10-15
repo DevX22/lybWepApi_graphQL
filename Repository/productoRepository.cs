@@ -16,7 +16,7 @@ namespace Repository
     public class productoRepository<T> : genericRepository<T> where T : class
     {
         private IMapper _map = mapper.Go();
-        public async Task<List<productoDto>> listAllAsync()
+        public async Task<List<productoDto>> listFrontAsync()
         {
 
             List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.ToListAsync());
