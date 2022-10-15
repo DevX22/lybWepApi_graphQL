@@ -17,7 +17,7 @@ namespace Models
         public string nombreComercial {get; set;}
         [MaxLength(12)]
         public string ruc {get; set;}
-        public string dirección {get; set;}
+        public string direccion {get; set;}
         [MaxLength(9)]
         public string Celular {get; set;}
         [MaxLength(9)]
@@ -30,6 +30,5 @@ namespace Models
 
         [ForeignKey("id_representante")]
         public virtual personaModel? representate { get; set; }
-
     }
 }

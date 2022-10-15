@@ -24,5 +24,7 @@ namespace Models.dto
         public decimal precioVenta { get; set; }
         public int? stock { get; set; }
         public bool estado { get; set; }
+        public virtual List<colorProductoModel>? colorProducto { get; set; }
+        public virtual List<imgProductoModel>? imgProducto { get; set; }
     }
 }
