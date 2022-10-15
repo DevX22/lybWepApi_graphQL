@@ -209,8 +209,8 @@ namespace Repository.genericRepository
         {
             try
             {
-                _dbSet.AddRangeAsync(lista);
-                _db.SaveChangesAsync();
+                await _dbSet.AddRangeAsync(lista);
+                await _db.SaveChangesAsync();
                 return lista;
             }
             catch (Exception ex)
@@ -240,7 +240,7 @@ namespace Repository.genericRepository
             try
             {
                 _dbSet.UpdateRange(lista);
-                _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return lista;
             }
             catch (Exception ex)

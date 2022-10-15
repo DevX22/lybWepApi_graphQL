@@ -14,58 +14,32 @@ namespace Presentation.Controllers
     {
         private readonly colorProductoLogic _logic = new colorProductoLogic();
 
-        [HttpPost("create")]
-        public async Task<IActionResult> post([FromBody]colorProductoModel req)
-        {
-            try
-            {
-                colorProductoModel res = await _logic.CreateAsync(req);
-                if (res.id == 0 || res.id == null)
-                {
-                    return NotFound(false);
-                }
-                return Ok(res.id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
         [HttpPost("inserMultiple")]
-        public async Task<IActionResult> post([FromBody] List<colorProductoModel> req)
+        public IActionResult post([FromBody] List<colorProductoModel> req)
         {
             try
             {
-                List<colorProductoModel> res = await _logic.insertMultipleAsyc(req);
-                #region foreach
-                //foreach (var item in res)
-                //{
-                //    if (item.id == 0)
-                //    {
-                //        return BadRequest();
-                //    }
-                //}
-                #endregion
+                var res = _logic.insertMultipleAsyc(req);
                 return Ok(true);
             }
             catch (Exception)
             {
+                return BadRequest(false);
                 throw;
             }
         }
 
         [HttpPut("updateMultiple")]
-        public async Task<IActionResult> put([FromBody]List<colorProductoModel> req)
+        public IActionResult put([FromBody]List<colorProductoModel> req)
         {
             try
             {
-                List<colorProductoModel> res = await _logic.updateMultipleAsync(req);
+                var res = _logic.updateMultipleAsync(req);
                 return CreatedAtAction(Request.Method, true);
             }
             catch (Exception)
             {
+                return BadRequest(false);
                 throw;
             }
         }

@@ -13,7 +13,7 @@ namespace Models
     public class colorProductoModel
     {
         [Key]
-        public int id { get; set; }
+        public Int64 id { get; set; }
         public int id_producto { get; set; }
         public int stock { get; set; }
         public string colorName { get; set; }

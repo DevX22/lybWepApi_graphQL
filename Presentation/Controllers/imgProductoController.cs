@@ -28,46 +28,52 @@ namespace Presentation.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         [HttpPost("inserMultiple")]
-        public async Task<IActionResult> post([FromBody] List<imgProductoModel> req)
+        public IActionResult post([FromBody] List<imgProductoModel> req)
         {
             try
             {
-                List<imgProductoModel> res = await _logic.insertMultipleAsyc(req);
-                #region foreach
-                //foreach (var item in res)
-                //{
-                //    if (item.id == 0)
-                //    {
-                //        return BadRequest();
-                //    }
-                //}
-                #endregion
-                return Ok(true);
+                var res = _logic.insertMultipleAsyc(req);
+                return CreatedAtAction(Request.Method,true);
             }
             catch (Exception)
             {
+                return BadRequest(false);
                 throw;
             }
         }
 
         [HttpPut("updateMultiple")]
-        public async Task<IActionResult> put([FromBody]List<imgProductoModel> req)
+        public IActionResult put([FromBody]List<imgProductoModel> req)
         {
             try
             {
-                List<imgProductoModel> res = await _logic.updateMultipleAsync(req);
+                var res = _logic.updateMultipleAsync(req);
                 return CreatedAtAction(Request.Method, true);
             }
             catch (Exception)
             {
+                return BadRequest(false);
                 throw;
             }
         }
+        /*[HttpPut("updateMultipleSync")]
+        public async Task<IActionResult> putSync([FromBody] List<imgProductoModel> req)
+        {
+            try
+            {
+                var res = await _logic.updateMultipleAsync(req);
+                return CreatedAtAction(Request.Method, res);
+            }
+            catch (Exception)
+            {
+                return BadRequest(false);
+                throw;
+            }
+        }*/
     }
 }
