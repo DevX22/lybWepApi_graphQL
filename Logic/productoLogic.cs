@@ -15,9 +15,26 @@ namespace Logic
 {
     public class productoLogic : productoRepository<productoModel>
     {
+        private readonly imgProductoLogic _dbImg = new imgProductoLogic();
+        private readonly colorProductoLogic _dbColor = new colorProductoLogic();
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
+        }
+
+        public async Task<List<productoDto>> listAllAsync()
+        {
+            List<productoDto> res = await listFrontAsync();
+            if(res != null)
+            {
+                foreach (productoDto producto  in res)
+                {
+                    producto.imgProducto = await _dbImg.GetByProductAsync(producto.id);
+                    producto.colorProducto = await _dbColor.GetByProductAsync(producto.id);
+                }
+            }
+            return res;
         }
     }
 }
