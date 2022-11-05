@@ -14,12 +14,12 @@ namespace Presentation.Controllers
     {
         private readonly imgProductoLogic _logic = new imgProductoLogic();
 
-        [HttpGet("listByProduct/{id}")]
+        [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {
             try
             {
-                List<imgProductoModel> res = await _logic.GetByProductAsync(id);
+                List<imgProductoModel> res = await _logic.GetByProductIdAsync(id);
                 if (res == null)
                 {
                     return NotFound(res);
@@ -32,6 +32,8 @@ namespace Presentation.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpPost("inserMultiple")]
         public IActionResult post([FromBody] List<imgProductoModel> req)
         {

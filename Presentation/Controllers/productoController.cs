@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.dto;
+using Models.request;
 using Newtonsoft.Json.Linq;
 
 namespace Presentation.Controllers
@@ -33,12 +34,12 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpGet("list")]
-        public async Task<IActionResult> get()
+        [HttpPost("list")]
+        public async Task<IActionResult> get([FromBody] filterRequest? req)
         {
             try
             {
-                List<productoDto> res = await _logic.listAllAsync();
+                List<productoDto> res = await _logic.listAllAsync(req);
                 return Ok(res);
             }
             catch (Exception)

@@ -24,7 +24,7 @@ namespace Models
         //public virtual usuarioModel Usuario { get; set; }
 
         [ForeignKey("id_venta")]
-        public virtual ventasModel Ventas { get; set; }
+        public virtual ventaModel Ventas { get; set; }
 
         [ForeignKey("id_estado")]
         public virtual estadosDeliveryModal EstadosDelivery { get; set; }

@@ -2,7 +2,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Models;
 using Models.mapperConfig;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Text;
@@ -15,8 +14,8 @@ builder.Services.AddControllers();
 //Config ApiVersioning
 builder.Services.AddConfigApiVersioning();
 
-//dbconfig and jwt
-globalVar.Go(builder.Configuration);
+//dbStringConnection and jwt vars
+builder.Configuration.setConnectionAndJwtVars();
 
 //mapper config
 IMapper mapper = mappConfig.registerMaps().CreateMapper();
@@ -34,6 +33,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddConfigSwaggerGen();
 
 var app = builder.Build();
+app.Environment.Development();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())

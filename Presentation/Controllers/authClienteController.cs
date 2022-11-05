@@ -9,8 +9,8 @@ using Tools;
 namespace Presentation.Controllers
 {
     [Route("api/cliente")]
-    [Route("api/v{version:apiVersion}/cliente")]
-    [ApiVersion(versionApi.v1)]
+    //[Route("api/v{version:apiVersion}/cliente")]
+    //[ApiVersion(versionApi.v1)]
     [ApiController]
     
     [AllowAnonymous]

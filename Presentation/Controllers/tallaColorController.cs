@@ -9,25 +9,22 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion(versionApi.v1)]
+    //[Route("api/v{version:apiVersion}/[controller]")]
+    //[ApiVersion(versionApi.v1)]
     [AllowAnonymous]
     public class tallaColorController : ControllerBase
     {
         private readonly tallaColorLogic _logic = new tallaColorLogic();
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("listByTallaId/{id}")]
         public async Task<IActionResult> get(int id)
         {
-            try
+            List<tallaColorModel> res = await _logic.GetByTallaIdAsync(id);
+            if (res == null)
             {
-                tallaColorModel res = await _logic.GetByIdAsync(id);
-                return Ok(res);
+                return NotFound(res);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Ok(res);
         }
 
         [HttpGet("list")]

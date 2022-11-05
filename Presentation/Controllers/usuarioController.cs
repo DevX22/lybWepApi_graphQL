@@ -1,6 +1,5 @@
 ﻿using Logic;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.dto;
@@ -12,7 +11,7 @@ namespace Presentation.Controllers
     [AllowAnonymous]
     public class usuarioController : ControllerBase
     {
-        private readonly usuarioLogic _logic = new usuarioLogic();
+        private readonly usuarioLogic _logic = new();
 
         [HttpGet("list")]
         public IActionResult get()
@@ -30,6 +29,7 @@ namespace Presentation.Controllers
             {
                 throw;
             }
+
         }
 
         [HttpPost("create")]

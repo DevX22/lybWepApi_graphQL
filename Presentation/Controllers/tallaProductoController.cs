@@ -10,25 +10,22 @@ namespace Presentation.Controllers
     
     [ApiController]
     [Route("api/[controller]")]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiVersion(versionApi.v1)]
+    //[Route("api/v{version:apiVersion}/[controller]")]
+    //[ApiVersion(versionApi.v1)]
     [AllowAnonymous]
     public class tallaProductoController : ControllerBase
     {
         private readonly tallaProductoLogic _logic = new tallaProductoLogic();
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {
-            try
+            List<tallaProductoModel> res = await _logic.GetByProductIdAsync(id);
+            if (res == null)
             {
-                tallaProductoModel res = await _logic.GetByIdAsync(id);
-                return Ok(res);
+                return NotFound(res);
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return Ok(res);
         }
 
         [HttpGet("list")]

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Data;
 using System;
@@ -23,8 +24,8 @@ namespace Repository.genericRepository
         {
             try
             {
-                IQueryable<TEntity> query = _dbSet;
-                return query.ToList();
+                IQueryable<TEntity> avatar = _dbSet;
+                return avatar.ToList();
 
             }
             catch (Exception ex)
@@ -54,7 +55,7 @@ namespace Repository.genericRepository
         {
             try
             {
-                return _dbSet.Find(id);
+                return _dbSet.Find();
             }
             catch (Exception ex)
             {
@@ -157,7 +158,6 @@ namespace Repository.genericRepository
                 //CustomException exx = new CustomException("Error al eliminar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
                 //throw exx;
             }
-
         }
 
         public virtual int updateMultipleItems(List<TEntity> lista)

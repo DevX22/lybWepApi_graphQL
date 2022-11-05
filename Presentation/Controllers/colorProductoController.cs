@@ -44,10 +44,10 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpGet("listByProduct/{id}")]
+        [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {
-            List<colorProductoModel> res = await _logic.GetByProductAsync(id);
+            List<colorProductoModel> res = await _logic.GetByProductIdAsync(id);
             if (res == null)
             {
                 return NotFound(res);

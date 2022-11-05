@@ -24,6 +24,6 @@ namespace Models
         [MaxLength(9)]
         public string whatsApp { get; set; }
         public string correo { get; set; }
-        public DateTime fechaNacimiento { get; set; }
+        public DateOnly fechaNacimiento { get; set; }
     }
 }

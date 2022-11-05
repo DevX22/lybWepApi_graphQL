@@ -21,7 +21,7 @@ namespace Models
         public int descuento { get; set; }
 
         [ForeignKey("id_venta")]
-        public virtual ventasModel Ventas { get; set; }
+        public virtual ventaModel Ventas { get; set; }
 
         [ForeignKey("id_producto")]
         public virtual productoModel Producto { get; set; }

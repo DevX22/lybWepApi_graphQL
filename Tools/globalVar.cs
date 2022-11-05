@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace Tools
 {
     public static class globalVar
     {
@@ -15,7 +16,7 @@ namespace Models
         public static string JWTIssuer { get; set; }
         public static string JWTAudience { get; set; }
 
-        public static void Go(ConfigurationManager configuration)
+        public static void setConnectionAndJwtVars(this ConfigurationManager configuration)
         {
             cnn = configuration["ConnectionStrings:db"];
             JWTSubject = configuration["Jwt:Subject"];

@@ -11,7 +11,7 @@ namespace Repository
 {
     public class imgProductoRepository<T> : genericRepository<T> where T : class
     {
-        public virtual async Task<List<imgProductoModel>> GetByProductAsync(int id)
+        public virtual async Task<List<imgProductoModel>> GetByProductIdAsync(int id)
         {
             try
             {

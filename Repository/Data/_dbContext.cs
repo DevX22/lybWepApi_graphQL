@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tools;
 
 namespace Repository.Data
 {
@@ -14,6 +9,7 @@ namespace Repository.Data
         #region config
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            #region old_Connection
             /*
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             configurationBuilder = configurationBuilder.AddJsonFile("appsettings.json");
@@ -22,6 +18,7 @@ namespace Repository.Data
             string conexion = configurationFile.GetConnectionString("conexion");
             optionsBuilder.UseSqlServer(connectionString: conexion);
             */
+            #endregion
 
             string conexion = globalVar.cnn;
             optionsBuilder.UseSqlServer(connectionString: conexion);
@@ -49,6 +46,9 @@ namespace Repository.Data
         public DbSet<productoModel> producto { get; set; }
         //proveedor
         public DbSet<proveedorModel> proveedor { get; set; }
+        //venta
+        public DbSet<procesoVentaModel> procesoVenta { get; set; }
+        public DbSet<ventaModel> venta { get; set; }
 
     }
 }

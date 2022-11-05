@@ -26,6 +26,9 @@ namespace Models.mapperConfig
             CreateMap<usuarioModel, userTokenDto>();
             CreateMap<usuarioModel, usuarioDto>().ReverseMap();
             CreateMap<productoModel, productoDto>().ReverseMap();
+            CreateMap<colorProductoModel,colorProductoDto>().ReverseMap();
+            CreateMap<imgProductoModel, imgProductoDto>().ReverseMap();
+            CreateMap<tallaColorModel, colorProductoDto>().ReverseMap();
         }
     }
 }

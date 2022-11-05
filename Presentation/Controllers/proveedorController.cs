@@ -8,8 +8,8 @@ using Tools;
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
-    [Route("api/v{version:apiVersion}")]
-    [ApiVersion(versionApi.v1)]
+    //[Route("api/v{version:apiVersion}")]
+    //[ApiVersion(versionApi.v1)]
     [ApiController]
     [AllowAnonymous]
     public class proveedorController : ControllerBase
