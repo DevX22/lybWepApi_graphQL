@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("estadosDelivery")]
-    public class estadosDeliveryModal
+    [Table("procesoDelivery")]
+    public class procesoDeliveryModel
     {
         [Key]
         public int id { get; set; }
-        public int estado { get; set; }
-        
+        public int ordenProceso { get; set; }
+        public string proceso { get; set; }
     }
 }
-

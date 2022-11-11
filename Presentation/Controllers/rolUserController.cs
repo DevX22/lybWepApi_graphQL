@@ -8,7 +8,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class rolUserController : ControllerBase
     {
         private readonly rolUserLogic _logic = new rolUserLogic();

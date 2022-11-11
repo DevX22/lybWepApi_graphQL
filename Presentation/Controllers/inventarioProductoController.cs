@@ -8,7 +8,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class inventarioProductoController : ControllerBase
     {
         private readonly inventarioProductoLogic _logic = new inventarioProductoLogic();

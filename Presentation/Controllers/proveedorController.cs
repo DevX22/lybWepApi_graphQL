@@ -11,7 +11,7 @@ namespace Presentation.Controllers
     //[Route("api/v{version:apiVersion}")]
     //[ApiVersion(versionApi.v1)]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class proveedorController : ControllerBase
     {
         private readonly proveedorLogic _logic = new proveedorLogic();

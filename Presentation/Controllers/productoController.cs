@@ -11,7 +11,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class productoController : ControllerBase
     {
         private readonly productoLogic _logic = new productoLogic();
@@ -34,6 +34,7 @@ namespace Presentation.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("list")]
         public async Task<IActionResult> get([FromBody] filterRequest? req)
         {
@@ -63,6 +64,7 @@ namespace Presentation.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("getById")]
         public async Task<IActionResult> get([FromBody]int id)
         {

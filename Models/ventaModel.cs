@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Tools;
 
 namespace Models
 {
@@ -17,8 +18,8 @@ namespace Models
         public string tipoComprobante { get; set; }
         public int serieComprobante { get; set; }
         public int numeroComprobante { get; set; }
-        public DateOnly fecha { get; set; }
-        public TimeOnly hora { get; set; }
+        public DateTime fecha { get; set; }
+        public TimeSpan hora { get; set; }
         public int id_tipoPago { get; set; }
         public string tipoPago { get; set; }
         public decimal subTotal { get; set; }
@@ -28,6 +29,7 @@ namespace Models
         public decimal total { get; set; }
         public int id_proceso { get; set; }
         public string proceso { get; set; }
+        public DateTime fechaVenta { get; set; }
 
         [ForeignKey("id_tipoComprobante")]
         public virtual  tipoComprobanteModel Comprobante { get; set; }
@@ -37,5 +39,6 @@ namespace Models
 
         [ForeignKey("id_tipoPago")]
         public virtual  tipoPagoModel? Pago { get; set; }
+
     }
 }

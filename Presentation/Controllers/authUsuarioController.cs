@@ -28,7 +28,6 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

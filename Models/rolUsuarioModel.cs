@@ -14,6 +14,7 @@ namespace Models
         [Key]
         public int id { get; set; }
         public int pesoRol { get; set; }
+        [MaxLength(50)]
         public string rolUsuario { get; set; }
     }
 }

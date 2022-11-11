@@ -16,7 +16,9 @@ namespace Models
         public Int64 id { get; set; }
         public int id_producto { get; set; }
         public int stock { get; set; }
+        [MaxLength(50)]
         public string colorName { get; set; }
+        [MaxLength(8)]
         public string colorCode { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]

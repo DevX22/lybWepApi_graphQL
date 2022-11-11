@@ -9,7 +9,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class clienteController : ControllerBase
     {
         private readonly clienteLogic _logic = new clienteLogic();
@@ -28,7 +28,6 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -43,7 +42,6 @@ namespace Presentation.Controllers
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

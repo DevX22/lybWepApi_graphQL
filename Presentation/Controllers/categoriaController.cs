@@ -4,16 +4,19 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Models;
+using Repository;
 
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class categoriaController : ControllerBase
     {
         private readonly categoriaLogic _logic = new categoriaLogic();
+        private readonly ingresoProductoRepository _ingreso = new();
 
+        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> get()
         {

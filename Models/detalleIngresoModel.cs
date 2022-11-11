@@ -9,27 +9,22 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("detalleVenta")]
-    public class detalleVentaModel
+    [Table("detalleIngreso")]
+    public class detalleIngresoModel
     {
         [Key]
         public Int64 id { get; set; }
-        public Int64 id_venta { get; set; }
+        public Int64 id_ingreso { get; set; }
         public int id_producto { get; set; }
         public string producto { get; set; }
-        public string descripcion { get; set; }
+        public decimal precioCompra { get; set; }
+        public decimal precioVenta { get; set; }
         public int cantidad { get; set; }
-        public decimal precio { get; set; }
-        public decimal descuento { get; set; }
-        public decimal total { get; set; }
 
-        [ForeignKey("id_venta"),JsonIgnore]
-        public virtual ventaModel? Venta { get; set; }
+        [ForeignKey("id_ingreso"),JsonIgnore]
+        public virtual ingresoProductoModel? IngresoProducto { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]
         public virtual productoModel? Producto { get; set; }
-
-
-
     }
 }

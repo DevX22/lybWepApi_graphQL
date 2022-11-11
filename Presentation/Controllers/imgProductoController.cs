@@ -9,11 +9,12 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class imgProductoController : ControllerBase
     {
         private readonly imgProductoLogic _logic = new imgProductoLogic();
 
+        [AllowAnonymous]
         [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {

@@ -8,7 +8,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class tipoMedidaController : ControllerBase
     {
         private tipoMedidaLogic _logic = new tipoMedidaLogic();

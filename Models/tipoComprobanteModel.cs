@@ -13,8 +13,7 @@ namespace Models
     {
         [Key]
         public int id { get; set; }
-        public int pesoComprobante { get; set; }
-        public bool tipoComprobante { get; set; }
+        public string comprobante { get; set; }
 
     }
 }

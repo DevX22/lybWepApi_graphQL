@@ -1,8 +1,11 @@
-﻿using System;
+﻿using AutoMapper.Configuration.Annotations;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +27,7 @@ namespace Models
         [MaxLength(9)]
         public string whatsApp { get; set; }
         public string correo { get; set; }
-        public DateOnly fechaNacimiento { get; set; }
+        public DateTime fechaNacimiento { get; set; }
+
     }
 }

@@ -12,11 +12,12 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     //[Route("api/v{version:apiVersion}/[controller]")]
     //[ApiVersion(versionApi.v1)]
-    [AllowAnonymous]
+    [Authorize]
     public class tallaProductoController : ControllerBase
     {
         private readonly tallaProductoLogic _logic = new tallaProductoLogic();
 
+        [AllowAnonymous]
         [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {

@@ -17,6 +17,8 @@ namespace Models
         public string usser { get; set; }
         public string contrasena { get; set; }
         public string direccionEnvio { get; set; }
+        public decimal destinoLat { get; set; }
+        public decimal destinoLng { get; set; }
         public string direccionCasa { get; set; }
         public string avatar { get; set; }
         public int id_persona { get; set; }

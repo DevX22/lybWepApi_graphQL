@@ -13,6 +13,7 @@ namespace Models
     {
         [Key]
         public int id { get; set; }
+        [MaxLength(4)]
         public string talla { get; set; }
     }
 }

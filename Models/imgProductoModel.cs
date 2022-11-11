@@ -16,7 +16,6 @@ namespace Models
         public Int64 id  { get; set; }
         public int id_producto { get; set; }
         public string nombreImg { get; set; }
-        public byte[]? imgBinary { get; set; }
         public string? imgUrl { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]

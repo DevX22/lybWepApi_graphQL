@@ -8,11 +8,12 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class tipoDocumentoController : ControllerBase
     {
         private readonly tipoDocumentoLogic _logic = new tipoDocumentoLogic();
 
+        [AllowAnonymous]
         [HttpGet("list")]
         public IActionResult get()
         {

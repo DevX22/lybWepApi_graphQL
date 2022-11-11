@@ -9,7 +9,7 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class colorProductoController : ControllerBase
     {
         private readonly colorProductoLogic _logic = new colorProductoLogic();
@@ -44,6 +44,7 @@ namespace Presentation.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {

@@ -1,12 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph;
 using Models;
+using Models.err_Models;
 using Tools;
 
 namespace Repository.Data
 {
     public class _dbContext:DbContext
     {
-        #region config
+        #region config_converterDateOnly
+        protected override void ConfigureConventions(ModelConfigurationBuilder builder)
+        {
+
+            builder.Properties<DateOnly>()
+                .HaveConversion<dateOnlyConverter>()
+                .HaveColumnType("date");
+            builder.Properties<TimeOnly>()
+                .HaveConversion<timeOnlyConverter>()
+                .HaveColumnType("time");
+            base.ConfigureConventions(builder);
+        }
+        #endregion
+
+        #region config_DB
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             #region old_Connection
@@ -49,6 +65,8 @@ namespace Repository.Data
         //venta
         public DbSet<procesoVentaModel> procesoVenta { get; set; }
         public DbSet<ventaModel> venta { get; set; }
+        //err_back
+        public DbSet<err_BackModel> err_back { get; set; }
 
     }
 }

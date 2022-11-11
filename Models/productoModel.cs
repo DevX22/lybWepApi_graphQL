@@ -22,10 +22,14 @@ namespace Models
         public string categoria { get; set; }
         public int id_tipoMedida {get; set;}
         public string tipoMedida { get; set; }
-        public string? medida {get; set;}
-        public string? alto { get; set; }
-        public string? ancho { get; set; }
-        public string? profundidad { get; set; }
+        [MaxLength(50)]
+        public string? medida { get; set; } = "0";
+        [MaxLength(10)]
+        public string? alto { get; set; } = "0";
+        [MaxLength(10)]
+        public string? ancho { get; set; } = "0";
+        [MaxLength(10)]
+        public string? profundidad { get; set; } = "0";
         public decimal precioCompra {get; set;}
         public decimal precioVenta {get; set;}
         public int? stock { get; set; }
@@ -33,12 +37,12 @@ namespace Models
         
 
         [ForeignKey("id_proveedor"),JsonIgnore]
-        public virtual proveedorModel? proveedorMod { get; set; }
+        public virtual proveedorModel? Proveedor { get; set; }
 
         [ForeignKey("id_categoria"),JsonIgnore]
-        public virtual categoriaModel? categoriaMod { get; set; }
+        public virtual categoriaModel? Categoria { get; set; }
 
         [ForeignKey("id_tipoMedida"),JsonIgnore]
-        public virtual tipoMedidaModel? tipoMedidaMod { get; set; }
+        public virtual tipoMedidaModel? TipoMedida { get; set; }
     }
 }

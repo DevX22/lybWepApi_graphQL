@@ -11,11 +11,12 @@ namespace Presentation.Controllers
     [ApiController]
     //[Route("api/v{version:apiVersion}/[controller]")]
     //[ApiVersion(versionApi.v1)]
-    [AllowAnonymous]
+    [Authorize]
     public class tallaColorController : ControllerBase
     {
         private readonly tallaColorLogic _logic = new tallaColorLogic();
 
+        [AllowAnonymous]
         [HttpGet("listByTallaId/{id}")]
         public async Task<IActionResult> get(int id)
         {
