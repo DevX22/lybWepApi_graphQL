@@ -48,6 +48,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseCustomSwaggerUI();
 }
 
+app.UseAuthentication();
+
 app.UseIpRateLimiting();
 
 app.UseRouting();
@@ -56,7 +58,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseMiddleware(typeof(ErrorMiddleware));
+//app.UseMiddleware(typeof(ErrorMiddleware));
 
 app.MapControllers();
 

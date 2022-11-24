@@ -79,7 +79,7 @@ namespace Logic
                 //filters
                 List<productoDto> productoFilter = new();
 
-                if (filterReq.categorias.Count > 0)
+                if (filterReq.categorias.Count > 0 && filterReq.categorias[0] != null)
                 {
                     foreach (var categoria in filterReq.categorias)
                     {
@@ -100,21 +100,21 @@ namespace Logic
                                   select prod;
                     res = produts.ToList();
                 }
-                if (filterReq.isOrderByZA == true)
+                else if (filterReq.isOrderByZA == true)
                 {
                     var produts = from prod in res
                                   orderby prod.producto descending
                                   select prod;
                     res = produts.ToList();
                 }
-                if (filterReq.isOrderByMenorMayor == true)
+                else if (filterReq.isOrderByMenorMayor == true)
                 {
                     var produts = from prod in res
                                   orderby prod.precioVenta ascending
                                   select prod;
                     res = produts.ToList();
                 }
-                if (filterReq.isOrderByMayorMenor == true)
+                else if (filterReq.isOrderByMayorMenor == true)
                 {
                     var produts = from prod in res
                                   orderby prod.precioVenta descending

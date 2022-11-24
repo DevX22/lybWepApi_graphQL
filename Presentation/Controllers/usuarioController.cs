@@ -1,8 +1,11 @@
-﻿using Logic;
+﻿using Azure;
+using Logic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.dto;
+using Models.request;
+using Models.response;
 
 namespace Presentation.Controllers
 {
@@ -12,50 +15,84 @@ namespace Presentation.Controllers
     public class usuarioController : ControllerBase
     {
         private readonly usuarioLogic _logic = new();
+        private ResponseBack _res = new();
 
         [HttpGet("list")]
-        public IActionResult get()
+        public async Task<IActionResult> get()
         {
             try
             {
-                List<usuarioDto> response = _logic.listDetaild();
-                if (response == null)
-                {
-                    return NotFound();
-                }
-                return Ok(response);
+                List<usuarioDto> res = await _logic.listDetaildAsyncUsser();
+                return Ok(res);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
+                _res.DisplayMessage = "Ocurrio un problema";
+                _res.isSuccess = false;
+                return BadRequest(_res);
             }
 
         }
 
         [HttpPost("create")]
-        public IActionResult post([FromBody] usuarioModel request)
+        public async Task<IActionResult> post([FromBody] usuarioModel request)
         {
             try
             {
-                bool success = _logic.Create(request);
-                return Ok(success);
+                usuarioModel res = await _logic.CreateAsyncUsser(request);
+                if (res.id == 0)
+                {
+                    _res.isSuccess = false;
+                    _res.DisplayMessage = "No se pudo registrar el usuario";
+                    return BadRequest(_res);
+                }
+                _res.DisplayMessage = "Usuario registrado exitosamente";
+                return Ok(_res);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
+                _res.DisplayMessage = "Ocurrio un problema";
+                _res.isSuccess = false;
+                return BadRequest(_res);
             }
         }
         [HttpPost("exists")]
-        public IActionResult post([FromBody] string usser)
+        public async Task<IActionResult> post([FromBody] string usser)
         {
             try
             {
-                bool exists = _logic.existsUsuario(usser);
-                return Ok(exists);
+                bool exists = await _logic.existsUsuarioAsyncUsser(usser);
+                if(exists)
+                {
+                    _res.isSuccess = exists;
+                    _res.DisplayMessage = $"Nombre de usuario {usser}, no disponible";
+                    return Ok(_res);
+                }
+                _res.isSuccess = exists;
+                _res.DisplayMessage = $"Nombre de usuario {usser}, disponible";
+                return Ok(_res);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw;
+                _res.DisplayMessage = "Ocurrio un problema";
+                _res.isSuccess = false;
+                return BadRequest(_res);
+            }
+        }
+
+        [HttpPut("updatePassWord")]
+        public async Task<IActionResult> putPass([FromBody] updatePasswordRequest req)
+        {
+            try
+            {
+                _res = await _logic.updatePasswordAsyncUsser(req);
+                return Ok(_res);
+            }
+            catch (Exception)
+            {
+                _res.DisplayMessage = "Ocurrio un problema";
+                _res.isSuccess = false;
+                return BadRequest(_res);
             }
         }
     }

@@ -35,6 +35,7 @@ namespace Models.common
                 new Claim("user",user.usser),
                 new Claim("id_rol",user.id_rolUsuario.ToString()),
                 new Claim("rol",rol),
+                new Claim(ClaimTypes.Role,rol),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(globalVar.JWTKey));
             var SingIn=new SigningCredentials(key,SecurityAlgorithms.HmacSha256);

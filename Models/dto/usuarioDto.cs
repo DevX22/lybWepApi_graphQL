@@ -11,6 +11,7 @@ namespace Models.dto
     {
         public int id { get; set; }
         public string usser { get; set; }
+        public string email { get; set; }
         public int id_persona { get; set; }
         public int id_rolUsuario { get; set; }
         public string avatar { get; set; }

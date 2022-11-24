@@ -1,10 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Models.err_Models;
 using Repository.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Tools;
@@ -31,9 +33,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Ocurrio un error al obtener toda la lista", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Ocurrio un error al obtener toda la lista", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
         public virtual async Task<List<TEntity>> GetAllAsync()
@@ -46,9 +47,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Ocurrio un error al obtener toda la lista", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Ocurrio un error al obtener toda la lista Async", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
         
@@ -60,9 +60,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Ocurrio un error al buscar el registro", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Ocurrio un error al buscar el registro por id", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -74,9 +73,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Ocurrio un error al buscar el registro", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Ocurrio un error al buscar el registro por id Async", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -90,9 +88,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al registrar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al registrar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
         public virtual async Task<TEntity> CreateAsync(TEntity entity)
@@ -105,9 +102,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al registrar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al registrar Async", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -122,9 +118,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al actualizar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al actualizar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -139,9 +134,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al actualizar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al actualizar Async", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -155,9 +149,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al eliminar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al eliminar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -170,9 +163,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al actualizar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al actualizar multiple items", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
 
@@ -185,9 +177,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al eliminar multiple items", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
 
         }
@@ -201,9 +192,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al insertar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
         public virtual async Task<List<TEntity>> insertMultipleAsyc(List<TEntity> lista)
@@ -216,9 +206,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al insertar multiple Async", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
         public virtual List<TEntity> updateMultiple(List<TEntity> lista)
@@ -231,9 +220,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al actualizar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
         public virtual async Task<List<TEntity>> updateMultipleAsync(List<TEntity> lista)
@@ -246,9 +234,8 @@ namespace Repository.genericRepository
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
-                //CustomException exx = new CustomException("Error al eliminar multiple", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
-                //throw exx;
+                CustomException exx = new CustomException("Error al actualizar multiple Async: ", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
             }
         }
     }

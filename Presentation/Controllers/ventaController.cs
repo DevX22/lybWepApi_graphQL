@@ -9,21 +9,21 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    public class tipoMedidaController : ControllerBase
+    [AllowAnonymous]
+    public class ventaController : ControllerBase
     {
-        private readonly tipoMedidaLogic _logic = new();
+        private readonly ventaLogic _logic = new();
         private ResponseBack _res = new();
 
         [HttpGet("list")]
-        public async Task<IActionResult> get()
+        public async Task<IActionResult> getAll()
         {
             try
             {
-                List<tipoMedidaModel> response = await _logic.GetAllAsync();
-                return Ok(response);
+                List<ventaModel> res = await _logic.GetAllAsync();
+                return Ok(res);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _res.DisplayMessage = "Ocurrio un problema";
                 _res.isSuccess = false;
@@ -32,18 +32,18 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> post([FromBody] tipoMedidaModel req)
+        public async Task<IActionResult> post([FromBody] ventaModel req)
         {
             try
             {
-                tipoMedidaModel res = await _logic.CreateAsync(req);
+                ventaModel res = await _logic.CreateAsync(req);
                 if (res.id == 0)
                 {
+                    _res.DisplayMessage = "No se pudo registrar la venta";
                     _res.isSuccess = false;
-                    _res.DisplayMessage = $"No se pudo registrar el tipo de medida {req.tipoMedida}";
                     return BadRequest(_res);
                 }
-                _res.DisplayMessage = $"el tipo de medida {res.tipoMedida} se registro existosamente";
+                _res.DisplayMessage = "Venta registrada exitosamente";
                 return Ok(_res);
             }
             catch (Exception)
@@ -55,12 +55,12 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> put([FromBody] tipoMedidaModel req)
+        public async Task<IActionResult> put([FromBody] ventaModel req)
         {
             try
             {
-                tipoMedidaModel res = await _logic.UpdateAsync(req);
-                _res.DisplayMessage = "Se actualizó el tipo de medida";
+                ventaModel res = await _logic.UpdateAsync(req);
+                _res.DisplayMessage = "Venta actualizada existosamente";
                 return Ok(_res);
             }
             catch (Exception)
@@ -69,6 +69,8 @@ namespace Presentation.Controllers
                 _res.isSuccess = false;
                 return BadRequest(_res);
             }
+
         }
+
     }
 }

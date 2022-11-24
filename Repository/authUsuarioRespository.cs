@@ -35,7 +35,7 @@ namespace Repository
             usuarioModel user = _db.usuario
                 .Include(x => x.persona)
                 .Include(x => x.rolUser)
-                .Where(x => x.contrasena == request.user && x.contrasena == password).FirstOrDefault();
+                .Where(x => x.usser == request.user && x.contrasena == password).FirstOrDefault();
             if (user == null)
             {
                 loginResponse.status = "Datos de ingreso incorrectos";

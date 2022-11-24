@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Graph;
 using Models;
 using Models.err_Models;
 using Tools;
@@ -31,7 +30,7 @@ namespace Repository.Data
             configurationBuilder = configurationBuilder.AddJsonFile("appsettings.json");
 
             IConfiguration configurationFile = configurationBuilder.Build();
-            string conexion = configurationFile.GetConnectionString("conexion");
+            string conexion = configurationFile.GetConnectionString("db");
             optionsBuilder.UseSqlServer(connectionString: conexion);
             */
             #endregion
@@ -60,6 +59,7 @@ namespace Repository.Data
         public DbSet<tallaColorModel> tallaColor { get; set; }
         public DbSet<coloresModel> colores { get; set; }
         public DbSet<productoModel> producto { get; set; }
+        public DbSet<ingresoProductoModel> ingresoProducto { get; set; }
         //proveedor
         public DbSet<proveedorModel> proveedor { get; set; }
         //venta

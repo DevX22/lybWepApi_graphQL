@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
+using Models.request;
+using Models.response;
 using Repository.genericRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tools;
 
 namespace Repository
 {
@@ -16,17 +19,17 @@ namespace Repository
             GC.SuppressFinalize(this);
         }
 
-        public List<usuarioModel> listDetaild()
+        public async Task<List<usuarioModel>> listDetaildAsync()
         {
-            List<usuarioModel> response = _db.usuario
+            List<usuarioModel> response = await _db.usuario
                 .Include(x => x.persona)
-                .Include(x => x.rolUser).ToList();
+                .Include(x => x.rolUser).ToListAsync();
             return response;
         }
 
-        public bool existsUsuario(string usser)
+        public async Task<bool> existsUsuarioAsync(string usser)
         {
-            usuarioModel response = _db.usuario.Where(x => x.usser == usser.Trim()).FirstOrDefault();
+            usuarioModel response = await _db.usuario.Where(x => x.usser == usser.Trim()).FirstOrDefaultAsync();
             if (response == null || response.usser == "")
             {
                 return false;

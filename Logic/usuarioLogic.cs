@@ -2,6 +2,8 @@
 using Models;
 using Models.dto;
 using Models.mapperConfig;
+using Models.request;
+using Models.response;
 using Repository;
 using Repository.Data;
 using System;
@@ -13,32 +15,60 @@ using Tools;
 
 namespace Logic
 {
-    public class usuarioLogic
+    public class usuarioLogic : usuarioRepository
     {
-        private readonly usuarioRepository _repo = new usuarioRepository();
         private readonly IMapper _map = mapper.Go();
 
-        public bool Create(usuarioModel request)
+        public async Task<usuarioModel> CreateAsyncUsser(usuarioModel request)
         {
             request.usser = character.remove(request.usser.ToUpper());
             request.contrasena = encrypt.SHA256(character.remove(request.contrasena));
-            _repo.Create(request);
-            if (request.id == 0 || request.id == null)
-            {
-                return false;
-            }
-            return true;
+            await CreateAsync(request);
+            return request;
         }
 
-        public List<usuarioDto> listDetaild()
+        public async Task<List<usuarioDto>> listDetaildAsyncUsser()
         {
-            List<usuarioDto> response = _map.Map<List<usuarioDto>>(_repo.listDetaild());
+            List<usuarioDto> response = _map.Map<List<usuarioDto>>(await listDetaildAsync());
             return response;
         }
 
-        public bool existsUsuario(string usser)
+        public async Task<bool> existsUsuarioAsyncUsser(string usser)
         {
-            return _repo.existsUsuario(usser);
+            return await existsUsuarioAsync(usser);
         }
+
+        public async Task<ResponseBack> updatePasswordAsyncUsser(updatePasswordRequest req)
+        {
+            ResponseBack _res = new();
+            string oldPass, newPass;
+            if (req == null)
+            {
+                _res.isSuccess = false;
+                _res.DisplayMessage = "Datos obligatorios";
+                return _res;
+            }
+            if (req.newPassword.Trim() != req.repeatPassword.Trim())
+            {
+                _res.isSuccess = false;
+                _res.DisplayMessage = "Repita la nueva contraseña";
+                return _res;
+            }
+            usuarioModel res = await GetByIdAsync(req.id_usser);
+            oldPass = encrypt.SHA256(character.remove(req.oldPassword));
+            newPass = encrypt.SHA256(character.remove(req.newPassword));
+            if (res.contrasena != oldPass)
+            {
+                _res.isSuccess = false;
+                _res.DisplayMessage = "Contraseña anterior incorrecta";
+                return _res;
+            }
+            res.contrasena = newPass;
+            await UpdateAsync(res);
+            _res.DisplayMessage = "Contraseña actualizada existosamente";
+            return _res;
+        }
+
+        //new password -- recuperar password
     }
 }

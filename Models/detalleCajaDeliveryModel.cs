@@ -21,8 +21,8 @@ namespace Models
         public string cliente { get; set; }
         public decimal total { get; set; }
 
-        //[ForeignKey("id_cajaDelivery"),JsonIgnore]
-        //public virtual cajaDeliveryModel CajaDelivery { get; set; }
+        [ForeignKey("id_cajaDelivery"),JsonIgnore]
+        public virtual cajaDeliveryModel CajaDelivery { get; set; }
 
         [ForeignKey("id_delivery"),JsonIgnore]
         public virtual deliveryModel Delivery { get; set; }
