@@ -11,6 +11,15 @@
     <PackageReference Include="AspNetCoreRateLimit" Version="4.0.2" />
     <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Altair" Version="7.1.1" />
+    <PackageReference Include="HotChocolate" Version="12.15.2" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.15.2" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.15.2" />
+    <PackageReference Include="HotChocolate.Data.EntityFramework" Version="12.15.2" />
+    <PackageReference Include="HotChocolate.Subscriptions" Version="12.15.2" />
+    <PackageReference Include="HotChocolate.Types.Filters" Version="12.15.2" />
+    <PackageReference Include="HotChocolate.Types.Selections" Version="10.5.5" />
+    <PackageReference Include="HotChocolate.Types.Sorting" Version="12.15.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
