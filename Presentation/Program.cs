@@ -1,16 +1,9 @@
 using AspNetCoreRateLimit;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Models;
-using Models.dto;
 using Models.mapperConfig;
-using Presentation.Middleware;
-using Presentation.Query;
-using Repository.Data;
-using Swashbuckle.AspNetCore.SwaggerUI;
-using System.Text;
+using Presentation.GraphQL.Schematics.Mutations;
+using Presentation.GraphQL.Schematics.Queries;
+using Presentation.GraphQL.Tools;
 using Tools;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,10 +31,10 @@ builder.Services.AddConfigAuthenticationJwt(builder);
 //Middleware IpRateLimit limitador de peticiones por ip
 builder.SetConfigureIpRateLimit();
 
-//GraphQL
+//GraphQL configuración
 builder.Services.AddGraphQLServer()
-    .AddAuthorization()
-    .AddQueryType<query>();
+    .AddQueryType<Query>()
+        .AddTypeExtensionCustom();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -55,8 +48,10 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseCustomSwaggerUI();
-    app.UseGraphQLAltair();
+    app.UseGraphQLAltair("/altair");
 }
+
+app.UseWebSockets();
 
 app.UseAuthentication();
 
@@ -68,11 +63,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapGraphQL();
-
 //app.UseMiddleware(typeof(ErrorMiddleware));
 
 app.MapControllers();
+
+app.MapGraphQL();
 
 app.UseCors(_MyCoors);
 

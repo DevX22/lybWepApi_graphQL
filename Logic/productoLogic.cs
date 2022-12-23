@@ -31,12 +31,12 @@ namespace Logic
         public async Task<List<productoDto>> listAllAsync(filterRequest filterReq)
         {
             List<productoDto> res = await listFrontAsync();
-            if(res != null)
+            if (res != null)
             {
-                foreach (productoDto producto  in res)
+                foreach (productoDto producto in res)
                 {
                     producto.imgProducto = _map.Map<List<imgProductoDto>>(await _dbImg.GetByProductIdAsync(producto.id));
-                    if (producto.tipoMedida!="talla")
+                    if (producto.tipoMedida != "talla")
                     {
                         producto.colorProducto = _map.Map<List<colorProductoDto>>(await _dbColor.GetByProductIdAsync(producto.id));
                     }
@@ -79,7 +79,12 @@ namespace Logic
                 //filters
                 List<productoDto> productoFilter = new();
 
-                if (filterReq.categorias.Count > 0 && filterReq.categorias[0] != null)
+                if (filterReq == null)
+                {
+                    return res;
+                }
+
+                if (filterReq.categorias != null && filterReq.categorias[0] != null && filterReq.categorias.Count > 0)
                 {
                     foreach (var categoria in filterReq.categorias)
                     {
