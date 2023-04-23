@@ -26,7 +26,7 @@ namespace Presentation.Controllers
                 {
                     return NotFound(false);
                 }
-                return Ok(res.id);
+                return Ok(true);
             }
             catch (Exception)
             {
@@ -45,13 +45,12 @@ namespace Presentation.Controllers
             return Ok(res);
         }
 
-
         [HttpGet("list")]
         public async Task<IActionResult> getAll()
         {
             try
             {
-                List<proveedorModel> res = await _logic.GetAllAsync();
+                List<proveedorModel> res = await _logic.listAsyncDetaild();
                 if(res == null)
                 {
                     return BadRequest(res);
@@ -61,6 +60,24 @@ namespace Presentation.Controllers
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> put([FromBody] proveedorModel req)
+        {
+            try
+            {
+                proveedorModel res = await _logic.updateAsyncCustom(req);
+                if (res.id == 0 || res.id == null)
+                {
+                    return NotFound(false);
+                }
+                return Ok(true);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

@@ -15,6 +15,13 @@ namespace Presentation.Controllers
     public class productoController : ControllerBase
     {
         private readonly productoLogic _logic = new productoLogic();
+        private readonly ILogger<productoController> _logger;
+
+        public productoController(ILogger<productoController> logger)
+        {
+            _logger = logger;
+            _logger.LogDebug(1, "NLog se injecto a productoController");
+        }
 
         [HttpPost("create")]
         public async Task<IActionResult> post([FromBody] productoModel req)
@@ -41,11 +48,12 @@ namespace Presentation.Controllers
             try
             {
                 List<productoDto> res = await _logic.listAllAsync(req);
+                _logger.LogInformation("lista de productos entregado con exito");
                 return Ok(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logger.LogError(ex.Message);
                 throw;
             }
         }
@@ -66,7 +74,7 @@ namespace Presentation.Controllers
 
         [AllowAnonymous]
         [HttpGet("getById")]
-        public async Task<IActionResult> get([FromBody]int id)
+        public async Task<IActionResult> get(int id)
         {
             try
             {
@@ -81,6 +89,20 @@ namespace Presentation.Controllers
             {
 
                 throw;
+            }
+        }
+        [AllowAnonymous]
+        [HttpGet("test")]
+        public async Task<IActionResult> test()
+        {
+            try
+            {
+                throw new ArgumentException("El argumento no es válido: Error");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,"Error en test: {0}", ex.Message);
+                throw ex;
             }
         }
     }

@@ -22,12 +22,23 @@ namespace Repository
             try
             {
                 List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.ToListAsync());
-                res = res;
                 return res;
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        public async Task<productoDto> getByIdFrontAsync(int id)
+        {
+            try
+            {
+                productoDto res = _map.Map<productoDto>(await _db.producto.FindAsync(id));
+                return res;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

@@ -10,8 +10,9 @@ namespace Presentation.GraphQL.Tools
             //agregar los demas Querys
             options
                 .AddTypeExtension<avatarQuery>()
+                .AddTypeExtension<productosQuery>()
                 .AddTypeExtension<productoQuery>()
-                //...
+            //...
 
 
             #region return

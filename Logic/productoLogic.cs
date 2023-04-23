@@ -129,5 +129,54 @@ namespace Logic
             }
             return res;
         }
+
+        public async Task<productoDto> getByIdDetailAsync(int id)
+        {
+            productoDto res = await getByIdFrontAsync(id);
+            if (res != null)
+            {
+                if (res.tipoMedida != "talla")
+                {
+                    res.colorProducto = _map.Map<List<colorProductoDto>>(await _dbColor.GetByProductIdAsync(res.id));
+                }
+                else
+                {
+                    List<string> colorsAdd = new();
+                    int TotColors = 0;
+                    res.colorProducto = new();
+                    List<tallaColorModel> colorsAll = new();
+                    List<tallaProductoModel> tallas = await _dbTallaProd.GetByProductIdAsync(res.id);
+                    foreach (tallaProductoModel talla in tallas)
+                    {
+                        colorsAll.AddRange(await _dbTallaColor.GetByTallaIdAsync(talla.id));
+                    }
+                    foreach (tallaColorModel colorAll in colorsAll)
+                    {
+                        bool state = false;
+                        if (TotColors == 0)
+                        {
+                            res.colorProducto.Add(_map.Map<colorProductoDto>(colorAll));
+                            colorsAdd.Add(colorAll.colorCode);
+                            TotColors++;
+                        };
+                        for (int i = 0; i < TotColors; i++)
+                        {
+                            if (colorsAdd[i] == colorAll.colorCode)
+                            {
+                                state = true;
+                            }
+                        }
+                        if (!state)
+                        {
+                            res.colorProducto.Add(_map.Map<colorProductoDto>(colorAll));
+                            colorsAdd.Add(colorAll.colorCode);
+                            TotColors++;
+                        }
+                    }
+                }
+
+            }
+            return res;
+        }
     }
 }
