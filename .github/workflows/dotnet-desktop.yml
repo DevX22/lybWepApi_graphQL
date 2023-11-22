@@ -43,7 +43,7 @@ jobs:
             if (Get-Process -Name "w3wp" -ErrorAction SilentlyContinue) {
               Stop-Process -Name "w3wp" -Force
             }
-            Stop-WebAppPool -Name AppNet
+            Stop-Website -Name "lybApi"
             Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
           } else {
             mkdir X:\wwwroot\lybApi
