@@ -39,8 +39,8 @@ jobs:
       # Aquí sigue el resto del flujo para la aplicación Angular sin Node.js ni npm
       - name: Clean public
         run: |
-          Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notmatch 'web.config',$_.Name -notmatch 'logs' } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
+          Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
 
       - name: Copy Files dist to public
         run: |
-          Copy-Item -Path "X:\deploy\lybWepApi_graphQL\Presentation\publish*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
+          Copy-Item -Path "X:\deploy\lybWepApi_graphQL\Presentation\publish\*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
