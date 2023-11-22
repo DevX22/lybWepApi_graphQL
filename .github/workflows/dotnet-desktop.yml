@@ -19,7 +19,7 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
-      # Este bloque verifica y clona el repositorio de la WebAPI si no existe
+      # Este bloque verifica y clona el repositorio
       # - name: Check if repository exists (WebAPI)
       #   run: |
       #     if (Test-Path -Path "X:\deploy\lybWepApi_graphQL\Presentation\Presentation.csproj") {
@@ -36,11 +36,16 @@ jobs:
           dotnet restore
           dotnet publish -c Release -o ./publish
 
-      # Aquí sigue el resto del flujo para la aplicación Angular sin Node.js ni npm
+      # Aquí se verifica y elimina archivos antiguos del public 
       - name: Clean public
         run: |
-          Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
+          if (Test-Path -Path "X:\wwwroot\lybApi\web.config") {
+            Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
+          } else {
+            mkdir X:\wwwroot\lybApi
+          }
 
       - name: Copy Files dist to public
         run: |
-          Copy-Item -Path "publish\*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
+          Get-ChildItem -Path "publish" | Where-Object { $_.Name -ne "web.config" } | ForEach-Object { Copy-Item -Path $_.FullName -Destination "X:\wwwroot\lybApi" -Recurse -Force }
+
