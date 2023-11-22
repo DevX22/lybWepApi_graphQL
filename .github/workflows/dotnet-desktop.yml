@@ -30,10 +30,6 @@ jobs:
       #       Write-Output "Cloning repository..."
       #       & "C:\Program Files\Git\bin\git.exe" clone https://github.com/YourUsername/YourWebAPIProject.git X:\deploy\lybWepApi_graphQL
       #     }
-
-      - name: Clean publish
-        run: |
-          Remove-Item -Path publish -Recurse -Force
           
       - name: Restore and publish .NET 6 WebAPI
         run: |
