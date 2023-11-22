@@ -9,7 +9,7 @@ using Presentation.GraphQL.Tools;
 using Tools;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-logger.Debug("inicializando programa");
+logger.Debug("inicializando el sistema lyb");
 
 try
 {
@@ -25,8 +25,8 @@ try
     builder.Configuration.setConnectionAndJwtVars();
 
     //mapper config
-    IMapper mapper = mappConfig.registerMaps().CreateMapper();
-    builder.Services.AddSingleton(mapper);
+    IMapper mappers = mapper.Go();
+    builder.Services.AddSingleton(mappers);
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
     //cors config
@@ -86,7 +86,7 @@ try
 }
 catch (Exception ex)
 {
-    logger.Error(ex, "inicialización del programa, Pausada por una excepción");
+    logger.Error(ex, "inicialización del sistema lyb, Pausada por una excepción");
 	throw;
 }
 finally

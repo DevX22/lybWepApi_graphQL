@@ -20,12 +20,14 @@ namespace Repository
         private readonly _dbContext _db = new _dbContext();
         private readonly token oToken = new token();
         private readonly IMapper _mapp = mapper.Go();
+        private readonly timeTokenRepository timeToken = new();
 
         public loginResponse authUsuario(authRequestModel request)
         {
             loginResponse loginResponse = new loginResponse();
             userResponse userResponse = new userResponse();
             userTokenDto userToken = new userTokenDto();
+
             if (request == null || request.password == "" || request.user == "")
             {
                 loginResponse.status = "Datos de ingreso faltantes";
@@ -50,7 +52,7 @@ namespace Repository
                 loginResponse.status = "Cuenta desabilitada";
                 return loginResponse;
             }
-            loginResponse.token = oToken.getToken(userToken, 15, userResponse.rolUser);
+            loginResponse.token = oToken.getToken(userToken, timeToken.min()!=0?timeToken.min():15, userResponse.rolUser);
             loginResponse.success = true;
             loginResponse.status = $"Bienvenido {user.persona.nombre}";
             return loginResponse;

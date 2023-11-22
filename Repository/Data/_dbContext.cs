@@ -65,6 +65,8 @@ namespace Repository.Data
         //venta
         public DbSet<procesoVentaModel> procesoVenta { get; set; }
         public DbSet<ventaModel> venta { get; set; }
+        //timeToken
+        public DbSet<timeTokenModel> timeToken { get; set; }
         //err_back
         public DbSet<err_BackModel> err_back { get; set; }
 
