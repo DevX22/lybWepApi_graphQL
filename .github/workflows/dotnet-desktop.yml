@@ -8,27 +8,27 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: backend
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       # Este bloque verifica y clona el repositorio de la WebAPI si no existe
-      - name: Check if repository exists (WebAPI)
-        run: |
-          if (Test-Path -Path "X:\deploy\lybWepApi_graphQL\Presentation\Presentation.csproj") {
-            Write-Output "Repository already exists, pulling changes..."
-            cd X:\deploy\lybWepApi_graphQL
-            & "C:\Program Files\Git\bin\git.exe" pull origin deploy
-          } else {
-            Write-Output "Cloning repository..."
-            & "C:\Program Files\Git\bin\git.exe" clone https://github.com/YourUsername/YourWebAPIProject.git X:\deploy\lybWepApi_graphQL
-          }
+      # - name: Check if repository exists (WebAPI)
+      #   run: |
+      #     if (Test-Path -Path "X:\deploy\lybWepApi_graphQL\Presentation\Presentation.csproj") {
+      #       Write-Output "Repository already exists, pulling changes..."
+      #       cd X:\deploy\lybWepApi_graphQL
+      #       & "C:\Program Files\Git\bin\git.exe" pull origin deploy
+      #     } else {
+      #       Write-Output "Cloning repository..."
+      #       & "C:\Program Files\Git\bin\git.exe" clone https://github.com/YourUsername/YourWebAPIProject.git X:\deploy\lybWepApi_graphQL
+      #     }
 
       - name: Restore and publish .NET 6 WebAPI
         run: |
-          cd X:\deploy\lybWepApi_graphQL\Presentation
+          cd _work_back\lybWepApi_graphQL\lybWepApi_graphQL
           dotnet restore
           dotnet publish -c Release -o ./publish
 
