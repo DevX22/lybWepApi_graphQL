@@ -41,6 +41,7 @@ jobs:
         run: |
           if (Test-Path -Path "X:\wwwroot\lybApi\web.config") {
             Stop-Website -Name "lybApi"
+            Stop-WebAppPool -Name AppNet
             Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
           } else {
             mkdir X:\wwwroot\lybApi
@@ -53,6 +54,7 @@ jobs:
           }else{
             Copy-Item -Path "publish\*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
           }
+          Start-WebAppPool -Name AppNet
           Start-Website -Name "lybApi"
           
 
