@@ -14,6 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
       # Este bloque verifica y clona el repositorio de la WebAPI si no existe
       # - name: Check if repository exists (WebAPI)
       #   run: |
