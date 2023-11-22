@@ -31,6 +31,10 @@ jobs:
       #       & "C:\Program Files\Git\bin\git.exe" clone https://github.com/YourUsername/YourWebAPIProject.git X:\deploy\lybWepApi_graphQL
       #     }
 
+      - name: Clean publish
+        run: |
+          Remove-Item -Path publish -Recurse -Force
+          
       - name: Restore and publish .NET 6 WebAPI
         run: |
           dotnet restore
@@ -43,4 +47,4 @@ jobs:
 
       - name: Copy Files dist to public
         run: |
-          Copy-Item -Path "X:\deploy\lybWepApi_graphQL\Presentation\publish\*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
+          Copy-Item -Path "publish\*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
