@@ -28,7 +28,6 @@ jobs:
 
       - name: Restore and publish .NET 6 WebAPI
         run: |
-          cd _work_back\lybWepApi_graphQL\lybWepApi_graphQL
           dotnet restore
           dotnet publish -c Release -o ./publish
 
