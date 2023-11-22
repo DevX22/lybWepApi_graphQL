@@ -49,7 +49,7 @@ jobs:
             mkdir X:\wwwroot\lybApi
           }
 
-      - name: Copy Files dist to public
+      - name: Copy Files publish to public
         run: |
           if (Test-Path -Path "X:\wwwroot\lybApi\web.config"){
             Get-ChildItem -Path "publish" | Where-Object { $_.Name -ne "web.config" } | ForEach-Object { Copy-Item -Path $_.FullName -Destination "X:\wwwroot\lybApi" -Recurse -Force }
