@@ -39,24 +39,28 @@ jobs:
       # Aquí se verifica y elimina archivos antiguos del public 
       - name: Clean public
         run: |
-          $filesToDelete = Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config', 'logs') }
+          if (Test-Path -Path "X:\wwwroot\lybApi\web.config") {
+            $filesToDelete = Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config', 'logs') }
 
-          $remainingFiles = $filesToDelete
+            $remainingFiles = $filesToDelete
 
-          $maxAttempts = 3
-          $attempts = 0
+            $maxAttempts = 3
+            $attempts = 0
 
-          while ($remainingFiles.Count -gt 0 -and $attempts -lt $maxAttempts) {
-            $attempts++
+            while ($remainingFiles.Count -gt 0 -and $attempts -lt $maxAttempts) {
+              $attempts++
 
-            foreach ($file in $remainingFiles) {
-              Remove-Item -Path $file.FullName -Recurse -Force -ErrorAction SilentlyContinue
+              foreach ($file in $remainingFiles) {
+                Remove-Item -Path $file.FullName -Recurse -Force -ErrorAction SilentlyContinue
+              }
+
+              $remainingFiles = Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config', 'logs') }
             }
-
-            $remainingFiles = Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config', 'logs') }
-          }
-          if ($remainingFiles.Count -gt 0) {
-            Write-Host "No se pudieron eliminar todos los archivos después de $attempts intentos."
+            if ($remainingFiles.Count -gt 0) {
+              Write-Host "No se pudieron eliminar todos los archivos después de $attempts intentos."
+            }
+          }else{
+            mkdir X:\wwwroot\lybApi
           }
           # if (Test-Path -Path "X:\wwwroot\lybApi\web.config") {
           #   Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
@@ -64,7 +68,12 @@ jobs:
           #   mkdir X:\wwwroot\lybApi
           # }
 
-      # - name: Copy Files dist to public
-      #   run: |
-      #     Get-ChildItem -Path "publish" | Where-Object { $_.Name -ne "web.config" } | ForEach-Object { Copy-Item -Path $_.FullName -Destination "X:\wwwroot\lybApi" -Recurse -Force }
+      - name: Copy Files dist to public
+        run: |
+          if (Test-Path -Path "X:\wwwroot\lybApi\web.config"){
+            Get-ChildItem -Path "publish" | Where-Object { $_.Name -ne "web.config" } | ForEach-Object { Copy-Item -Path $_.FullName -Destination "X:\wwwroot\lybApi" -Recurse -Force }
+          }else{
+            Copy-Item -Path "publish\*" -Destination "X:\wwwroot\lybApi" -Recurse -Force
+          }
+          
 
