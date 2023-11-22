@@ -39,11 +39,31 @@ jobs:
       # Aquí se verifica y elimina archivos antiguos del public 
       - name: Clean public
         run: |
-          if (Test-Path -Path "X:\wwwroot\lybApi\web.config") {
-            Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
-          } else {
-            mkdir X:\wwwroot\lybApi
+          $filesToDelete = Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config', 'logs') }
+
+          $remainingFiles = $filesToDelete
+
+          $maxAttempts = 3
+          $attempts = 0
+
+          while ($remainingFiles.Count -gt 0 -and $attempts -lt $maxAttempts) {
+            $attempts++
+
+            foreach ($file in $remainingFiles) {
+              Remove-Item -Path $file.FullName -Recurse -Force -ErrorAction SilentlyContinue
+            }
+
+            $remainingFiles = Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config', 'logs') }
           }
+
+          if ($remainingFiles.Count -gt 0) {
+            Write-Host "No se pudieron eliminar todos los archivos después de $attempts intentos."
+          }
+          # if (Test-Path -Path "X:\wwwroot\lybApi\web.config") {
+          #   Get-ChildItem -Path X:\wwwroot\lybApi | Where-Object { $_.Name -notin @('web.config','logs') } | ForEach-Object { Remove-Item -Path $_.FullName -Recurse -Force }
+          # } else {
+          #   mkdir X:\wwwroot\lybApi
+          # }
 
       - name: Copy Files dist to public
         run: |
