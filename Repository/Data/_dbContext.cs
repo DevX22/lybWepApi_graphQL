@@ -70,5 +70,8 @@ namespace Repository.Data
         //err_back
         public DbSet<err_BackModel> err_back { get; set; }
 
+        //domainUrl
+        public DbSet<domainUrlModel> domainUrl { get; set; }
+
     }
 }

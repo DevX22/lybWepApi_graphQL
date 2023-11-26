@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("timeToken")]
-    public class timeTokenModel
+    [Table("domainUrl")]
+    public class domainUrlModel
     {
         [Key]
-        public int id { get; set; } = 1;
-        public int minutos { get; set; }
+        public int id { get; set; } = 100;
+        public string domain { get; set; }
+        public string imgDirectory { get; set; }
+
     }
 }
