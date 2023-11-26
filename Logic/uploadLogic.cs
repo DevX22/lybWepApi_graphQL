@@ -21,10 +21,8 @@ namespace Logic
                 {
                     throw new Exception("Debe subir una imagen");
                 }
-                byte[] buffer = new byte[8];
-                bool esImg = isFileImg(buffer);
+                byte[] buffer;
                 (string dom,string directory) = await _dom.Get();
-                string extension = Path.GetExtension(file.FileName);
 
 
                 if (file.Length > 5 * 1024 * 1024)
@@ -32,12 +30,13 @@ namespace Logic
 					throw new Exception($"La imagen excede el tamaño máximo permitido de 5Mb");
 				}
 
-				using (Stream stream = file.OpenReadStream())
+				using (MemoryStream mStream = new MemoryStream())
 				{
-					stream.Read(buffer, 0, buffer.Length);
+					await file.CopyToAsync(mStream);
+					buffer = mStream.ToArray();
 				}
-
-				if (esImg)
+                bool isImg = isFileImg(buffer);
+                if (!isImg)
 				{
 					throw new Exception("El archivo no es una imagen valida");
 				}
@@ -81,7 +80,7 @@ namespace Logic
                         break;
 				}
 
-                string rutaServer = Path.Combine(directory, file.FileName, "_", Guid.NewGuid().ToString(), extension);
+                string rutaServer = Path.Combine(directory,Guid.NewGuid().ToString()+"_"+file.FileName);
 
 				return await _up.img(rutaServer, file,dom);
 
