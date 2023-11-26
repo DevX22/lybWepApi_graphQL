@@ -13,7 +13,7 @@ namespace Presentation.Controllers
         private readonly uploadLogic _up = new();
 
         [HttpPost("avatar")]
-        public async Task<IActionResult> upAvatar([FromForm] IFormFile img)
+        public async Task<IActionResult> upAvatar(IFormFile img)
         {
             try
             {
