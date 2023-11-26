@@ -9,7 +9,7 @@ namespace Repository
 {
     public class uploadRepository
     {
-        public async Task<string> img(string rutaServer, IFormFile file,string domain)
+        public async Task<string> img(string rutaServer, IFormFile file)
         {
             try
             {
