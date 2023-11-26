@@ -13,11 +13,11 @@ namespace Presentation.Controllers
         private readonly uploadLogic _up = new();
 
         [HttpPost("avatar")]
-        public async Task<IActionResult> upAvatar([FromBody] uploadDto img)
+        public async Task<IActionResult> upAvatar([FromForm] IFormFile img)
         {
             try
             {
-                string url = await _up.img(categoryImgStatic.Avatar, img.file);
+                string url = await _up.img(categoryImgStatic.Avatar, img);
                 return Ok(url);
             }
             catch (Exception ex)
