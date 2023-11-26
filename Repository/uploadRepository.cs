@@ -19,7 +19,7 @@ namespace Repository
                 {
                     await file.CopyToAsync(stream);
                 }
-                return $"https://www.{domain}{rutaPublic}";
+                return $"{rutaPublic}";
 
             }
             catch (Exception)
