@@ -82,7 +82,7 @@ namespace Logic
 
                 string rutaServer = Path.Combine(directory,Guid.NewGuid().ToString()+"_"+file.FileName);
 
-				return await _up.img(rutaServer, file,dom);
+				return await _up.img(rutaServer, file);
 
             }
 			catch (Exception)
