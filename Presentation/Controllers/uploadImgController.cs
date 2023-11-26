@@ -1,4 +1,5 @@
 ﻿using Logic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.dto;
@@ -8,10 +9,12 @@ namespace Presentation.Controllers
 {
     [Route("api/upload/img")]
     [ApiController]
+    [Authorize]
     public class uploadImgController : ControllerBase
     {
         private readonly uploadLogic _up = new();
 
+        [AllowAnonymous]
         [HttpPost("avatar")]
         public async Task<IActionResult> upAvatar(IFormFile img)
         {
