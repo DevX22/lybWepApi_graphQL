@@ -25,5 +25,18 @@ namespace Repository
             }
             return (domain.domain, domain.imgDirectory);
         }
+        public async Task<string> GetDomain()
+        {
+            try
+            {
+                domainUrlModel res = await GetByIdAsync(100);
+                return res.domain;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
