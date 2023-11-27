@@ -1,5 +1,4 @@
-﻿using Models;
-using Repository;
+﻿using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class coloresLogic : coloresRepository
+    public class tallasLogic : tallasRepository
     {
 
     }

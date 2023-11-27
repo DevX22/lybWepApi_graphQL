@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class coloresRepository : genericRepository<coloresModel>, IDisposable
+    public class tallasRepository : genericRepository<tallasModel>, IDisposable
     {
         public void Dispose()
         {
