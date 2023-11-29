@@ -29,6 +29,7 @@ namespace Repository
 
         public async Task<bool> existsUsuarioAsync(string usser)
         {
+            usser = usser.ToUpper();
             usuarioModel response = await _db.usuario.Where(x => x.usser == usser.Trim()).FirstOrDefaultAsync();
             if (response == null || response.usser == "")
             {

@@ -57,19 +57,19 @@ namespace Presentation.Controllers
             }
         }
         [HttpPost("exists")]
-        public async Task<IActionResult> post([FromBody] string usser)
+        public async Task<IActionResult> post([FromBody]usserReq req)
         {
             try
             {
-                bool exists = await _logic.existsUsuarioAsyncUsser(usser);
+                bool exists = await _logic.existsUsuarioAsyncUsser(req.usser);
                 if(exists)
                 {
                     _res.isSuccess = exists;
-                    _res.DisplayMessage = $"Nombre de usuario {usser}, no disponible";
+                    _res.DisplayMessage = $"Nombre de usuario {req.usser}, no disponible";
                     return Ok(_res);
                 }
                 _res.isSuccess = exists;
-                _res.DisplayMessage = $"Nombre de usuario {usser}, disponible";
+                _res.DisplayMessage = $"Nombre de usuario {req.usser}, disponible";
                 return Ok(_res);
             }
             catch (Exception)
@@ -86,6 +86,7 @@ namespace Presentation.Controllers
             try
             {
                 _res = await _logic.updatePasswordAsyncUsser(req);
+                _res.DisplayMessage = "Contraseña Cambiada";
                 return Ok(_res);
             }
             catch (Exception)
