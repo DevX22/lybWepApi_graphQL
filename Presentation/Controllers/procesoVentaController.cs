@@ -5,7 +5,7 @@ using Models;
 
 namespace Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/proceso/venta")]
     [ApiController]
     public class procesoVentaController : ControllerBase
     {

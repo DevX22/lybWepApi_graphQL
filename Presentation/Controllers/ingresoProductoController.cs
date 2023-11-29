@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/producto/ingreso")]
     [ApiController]
     [Authorize]
     public class ingresoProductoController : ControllerBase
