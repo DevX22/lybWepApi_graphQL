@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Models.response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,18 @@ namespace Repository
 {
     public class uploadRepository
     {
-        public async Task<string> img(string rutaServer, IFormFile file)
+        public async Task<uploadResponse> img(string rutaServer, IFormFile file)
         {
             try
             {
-                string rutaPublic = rutaServer.Substring(2).Replace("\\","/");
+                uploadResponse rutaPublic = new();
+                rutaPublic.url= rutaServer.Substring(2).Replace("\\", "/");
 
-                using(FileStream stream = new FileStream(rutaServer, FileMode.Create))
+                using (FileStream stream = new FileStream(rutaServer, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
-                return $"{rutaPublic}";
+                return rutaPublic;
 
             }
             catch (Exception)
