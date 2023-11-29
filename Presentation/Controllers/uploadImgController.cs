@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.dto;
+using Models.response;
 using Tools;
 
 namespace Presentation.Controllers
@@ -14,14 +15,13 @@ namespace Presentation.Controllers
     {
         private readonly uploadLogic _up = new();
 
-        [AllowAnonymous]
         [HttpPost("avatar")]
         public async Task<IActionResult> upAvatar(IFormFile img)
         {
             try
             {
-                string url = await _up.img(categoryImgStatic.Avatar, img);
-                return Ok(url);
+                uploadResponse res = await _up.img(categoryImgStatic.Avatar, img);
+                return Ok(res);
             }
             catch (Exception ex)
             {

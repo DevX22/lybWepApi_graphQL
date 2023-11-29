@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Models.response;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Logic
     {
 		private readonly uploadRepository _up = new();
         private readonly domainUrlRepository _dom = new();
-        public async Task<string> img(string category, IFormFile file)
+        public async Task<uploadResponse> img(string category, IFormFile file)
         {
             try
 			{
