@@ -31,7 +31,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpGet("listByProiduct/{id}")]
+        [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {
             try
