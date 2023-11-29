@@ -14,7 +14,6 @@ namespace Presentation.Controllers
     {
         private readonly imgProductoLogic _logic = new imgProductoLogic();
 
-        [AllowAnonymous]
         [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {

@@ -44,7 +44,6 @@ namespace Presentation.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {

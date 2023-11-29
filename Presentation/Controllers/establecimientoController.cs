@@ -2,23 +2,24 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Graph;
+using Models;
 
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class domainController : ControllerBase
+    public class establecimientoController : ControllerBase
     {
-        private readonly domainUrlLogic _logic = new();
+        private readonly establecimientoLogic _logic = new();
 
-        [HttpGet("get")]
+        [HttpGet("list")]
         public async Task<IActionResult> get()
         {
             try
             {
-                return Ok(await _logic.GetDomain());
+                List<establecimientoModel> res = await _logic.GetAllAsync();
+                return Ok(res);
             }
             catch (Exception)
             {

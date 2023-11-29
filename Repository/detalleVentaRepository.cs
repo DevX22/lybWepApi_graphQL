@@ -11,29 +11,27 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class ventaRepository : genericRepository<ventaModel>, IDisposable
+    public class detalleVentaRepository : genericRepository<detalleVentaModel>, IDisposable
     {
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
 
-        public virtual async Task<List<ventaModel>> GetAllDetailedAsync()
+        public async Task<List<detalleVentaModel>> GetAllByVentaIdAsync(int id)
         {
             try
             {
-                List<ventaModel> res = await _db.venta
-                    .Include(x=>x.Comprobante)
-                    .Include(x=>x.ProcesoVenta)
-                    .Include(x=>x.Pago).ToListAsync();
+                List<detalleVentaModel> res = await _db.detalleVenta.Where(x=>x.id_producto==id).ToListAsync();
                 return res;
 
             }
             catch (Exception ex)
             {
-                CustomException exx = new CustomException("Ocurrio un error al obtener toda la lista detallada Async", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                CustomException exx = new CustomException("Ocurrio un error al obtener la lista de detallas de un producto", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
                 throw exx;
             }
         }
+
     }
 }

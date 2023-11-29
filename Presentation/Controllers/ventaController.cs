@@ -9,7 +9,8 @@ namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
+
     public class ventaController : ControllerBase
     {
         private readonly ventaLogic _logic = new();
@@ -20,7 +21,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                List<ventaModel> res = await _logic.GetAllAsync();
+                List<ventaModel> res = await _logic.GetAllDetailedAsync();
                 return Ok(res);
             }
             catch (Exception)

@@ -60,11 +60,13 @@ namespace Repository.Data
         public DbSet<coloresModel> colores { get; set; }
         public DbSet<productoModel> producto { get; set; }
         public DbSet<ingresoProductoModel> ingresoProducto { get; set; }
+        public DbSet<tallasModel> tallas { get; set; }
         //proveedor
         public DbSet<proveedorModel> proveedor { get; set; }
         //venta
         public DbSet<procesoVentaModel> procesoVenta { get; set; }
         public DbSet<ventaModel> venta { get; set; }
+        public DbSet<detalleVentaModel> detalleVenta { get; set; }
         //timeToken
         public DbSet<timeTokenModel> timeToken { get; set; }
         //err_back
@@ -72,6 +74,17 @@ namespace Repository.Data
 
         //domainUrl
         public DbSet<domainUrlModel> domainUrl { get; set; }
+
+        //establecimiento
+
+        public DbSet<establecimientoModel> establecimiento { get; set; }
+
+        public DbSet<tipoComprobanteModel> tipoComprobante { get; set; }
+
+        public DbSet<tipoPagoModel> tipoPago { get; set;}
+
+
+
 
     }
 }

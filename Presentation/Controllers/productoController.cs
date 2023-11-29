@@ -41,7 +41,6 @@ namespace Presentation.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpPost("list")]
         public async Task<IActionResult> get([FromBody] filterRequest? req)
         {
@@ -72,7 +71,6 @@ namespace Presentation.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpGet("getById")]
         public async Task<IActionResult> get(int id)
         {
@@ -91,7 +89,7 @@ namespace Presentation.Controllers
                 throw;
             }
         }
-        [AllowAnonymous]
+
         [HttpGet("test")]
         public async Task<IActionResult> test()
         {

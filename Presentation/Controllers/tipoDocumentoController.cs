@@ -13,7 +13,6 @@ namespace Presentation.Controllers
     {
         private readonly tipoDocumentoLogic _logic = new tipoDocumentoLogic();
 
-        [AllowAnonymous]
         [HttpGet("list")]
         public IActionResult get()
         {

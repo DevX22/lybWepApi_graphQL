@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Tools;
 
 namespace Models
@@ -31,13 +32,13 @@ namespace Models
         public string? proceso { get; set; }
         public DateTime? fechaVenta { get; set; }
 
-        [ForeignKey("id_tipoComprobante")]
+        [ForeignKey("id_tipoComprobante"),JsonIgnore]
         public virtual  tipoComprobanteModel Comprobante { get; set; }
 
-        [ForeignKey("id_proceso")]
-        public virtual procesoVentaModel? Proceso { get; set; }
+        [ForeignKey("id_proceso"),JsonIgnore]
+        public virtual procesoVentaModel? ProcesoVenta { get; set; }
 
-        [ForeignKey("id_tipoPago")]
+        [ForeignKey("id_tipoPago"),JsonIgnore]
         public virtual  tipoPagoModel? Pago { get; set; }
 
     }

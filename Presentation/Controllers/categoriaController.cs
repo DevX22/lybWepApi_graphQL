@@ -16,7 +16,6 @@ namespace Presentation.Controllers
         private readonly categoriaLogic _logic = new categoriaLogic();
         private readonly ingresoProductoRepository _ingreso = new();
 
-        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> get()
         {

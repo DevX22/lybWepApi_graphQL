@@ -16,7 +16,6 @@ namespace Presentation.Controllers
     {
         private readonly tallaColorLogic _logic = new tallaColorLogic();
 
-        [AllowAnonymous]
         [HttpGet("listByTallaId/{id}")]
         public async Task<IActionResult> get(int id)
         {

@@ -17,7 +17,6 @@ namespace Presentation.Controllers
     {
         private readonly tallaProductoLogic _logic = new tallaProductoLogic();
 
-        [AllowAnonymous]
         [HttpGet("listByProductId/{id}")]
         public async Task<IActionResult> get(int id)
         {
