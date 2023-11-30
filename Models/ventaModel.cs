@@ -17,8 +17,8 @@ namespace Models
         public string? usuario { get; set; }
         public int? id_tipoComprobante { get; set; }
         public string? tipoComprobante { get; set; }
-        public int? serieComprobante { get; set; }
-        public int? numeroComprobante { get; set; }
+        public string? serieComprobante { get; set; }
+        public string? numeroComprobante { get; set; }
         public DateTime? fecha { get; set; }
         public TimeSpan? hora { get; set; }
         public int? id_tipoPago { get; set; }
@@ -40,6 +40,7 @@ namespace Models
 
         [ForeignKey("id_tipoPago"),JsonIgnore]
         public virtual  tipoPagoModel? Pago { get; set; }
+
 
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    [Table("tipoComprabante")]
+    [Table("tipoComprobante")]
     public class tipoComprobanteModel
     {
         [Key]

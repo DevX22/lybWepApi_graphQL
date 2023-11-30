@@ -16,6 +16,7 @@ namespace Presentation.Controllers
         private readonly ventaLogic _logic = new();
         private ResponseBack _res = new();
 
+        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> getAll()
         {
