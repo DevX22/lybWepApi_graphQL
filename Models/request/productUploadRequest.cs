@@ -11,6 +11,6 @@ namespace Models.request
     {
         public string productoName  { get; set; }
         public string category {  get; set; }           
-        public List<FormFile> imgs { get; set; }
+        public List<IFormFile> imgs { get; set; }
     }
 }
