@@ -34,7 +34,7 @@ namespace Presentation.Controllers
 
 
         [Authorize(Roles = "Administrador")]
-        [HttpPost("inserMultiple")]
+        [HttpPost("insertMultiple")]
         public IActionResult post([FromBody] List<imgProductoModel> req)
         {
             try

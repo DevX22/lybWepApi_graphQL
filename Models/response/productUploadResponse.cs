@@ -8,6 +8,12 @@ namespace Models.response
 {
     public class productUploadResponse
     {
-        public List<string> urls {  get; set; }
+        public List<imgProductoListDto> img {  get; set; }
+    }
+
+    public class imgProductoListDto
+    {
+        public string name { get; set; }
+        public string url { get; set; }
     }
 }

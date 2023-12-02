@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.dto;
 using Models.request;
 using Models.response;
+using TinyHelpers.Extensions;
 using Tools;
 
 namespace Presentation.Controllers
@@ -29,11 +30,16 @@ namespace Presentation.Controllers
                 return BadRequest(ex);
             }
         }
+        [AllowAnonymous]
         [HttpPost("producto")]
-        public async Task<IActionResult> upProducto([FromBody]productUploadRequest req)
+        public async Task<IActionResult> upProducto(List<IFormFile> img, [FromForm]string name, [FromForm] string category)
         {
             try
             {
+                productUploadRequest req = new productUploadRequest();
+                req.productoName = name;
+                req.category = category;
+                req.imgs = img;
                 productUploadResponse res = await _up.productImg(req);
                 if(res == null)
                 {
