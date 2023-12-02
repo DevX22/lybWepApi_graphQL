@@ -33,14 +33,14 @@ namespace Presentation.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost("inserMultiple")]
         public IActionResult post([FromBody] List<imgProductoModel> req)
         {
             try
             {
                 var res = _logic.insertMultipleAsyc(req);
-                return CreatedAtAction(Request.Method,true);
+                return Ok(true);
             }
             catch (Exception)
             {
