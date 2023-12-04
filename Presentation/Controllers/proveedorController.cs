@@ -45,7 +45,6 @@ namespace Presentation.Controllers
             return Ok(res);
         }
 
-        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> getAll()
         {
