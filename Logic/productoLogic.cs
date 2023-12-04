@@ -76,56 +76,56 @@ namespace Logic
                         }
                     }
                 }
-                //filters
-                List<productoDto> productoFilter = new();
+                ////filters
+                //List<productoDto> productoFilter = new();
 
-                if (filterReq == null)
-                {
-                    return res;
-                }
+                //if (filterReq == null)
+                //{
+                //    return res;
+                //}
 
-                if (filterReq.categorias != null && filterReq.categorias[0] != null && filterReq.categorias.Count > 0)
-                {
-                    foreach (var categoria in filterReq.categorias)
-                    {
-                        var producto = from prod in res
-                                       where prod.id_categoria == categoria.id
-                                       select prod;
-                        if (producto.Count() > 0)
-                        {
-                            productoFilter.AddRange(producto);
-                        }
-                    }
-                    res = productoFilter;
-                }
-                if (filterReq.isOrderByAZ == true)
-                {
-                    var produts = from prod in res
-                                  orderby prod.producto ascending
-                                  select prod;
-                    res = produts.ToList();
-                }
-                else if (filterReq.isOrderByZA == true)
-                {
-                    var produts = from prod in res
-                                  orderby prod.producto descending
-                                  select prod;
-                    res = produts.ToList();
-                }
-                else if (filterReq.isOrderByMenorMayor == true)
-                {
-                    var produts = from prod in res
-                                  orderby prod.precioVenta ascending
-                                  select prod;
-                    res = produts.ToList();
-                }
-                else if (filterReq.isOrderByMayorMenor == true)
-                {
-                    var produts = from prod in res
-                                  orderby prod.precioVenta descending
-                                  select prod;
-                    res = produts.ToList();
-                }
+                //if (filterReq.categorias != null && filterReq.categorias[0] != null && filterReq.categorias.Count > 0)
+                //{
+                //    foreach (var categoria in filterReq.categorias)
+                //    {
+                //        var producto = from prod in res
+                //                       where prod.id_categoria == categoria.id
+                //                       select prod;
+                //        if (producto.Count() > 0)
+                //        {
+                //            productoFilter.AddRange(producto);
+                //        }
+                //    }
+                //    res = productoFilter;
+                //}
+                //if (filterReq.isOrderByAZ == true)
+                //{
+                //    var produts = from prod in res
+                //                  orderby prod.producto ascending
+                //                  select prod;
+                //    res = produts.ToList();
+                //}
+                //else if (filterReq.isOrderByZA == true)
+                //{
+                //    var produts = from prod in res
+                //                  orderby prod.producto descending
+                //                  select prod;
+                //    res = produts.ToList();
+                //}
+                //else if (filterReq.isOrderByMenorMayor == true)
+                //{
+                //    var produts = from prod in res
+                //                  orderby prod.precioVenta ascending
+                //                  select prod;
+                //    res = produts.ToList();
+                //}
+                //else if (filterReq.isOrderByMayorMenor == true)
+                //{
+                //    var produts = from prod in res
+                //                  orderby prod.precioVenta descending
+                //                  select prod;
+                //    res = produts.ToList();
+                //}
             }
             return res;
         }

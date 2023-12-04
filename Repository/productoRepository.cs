@@ -18,10 +18,9 @@ namespace Repository
         private IMapper _map = mapper.Go();
         public async Task<List<productoDto>> listFrontAsync()
         {
-
             try
             {
-                List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.ToListAsync());
+                List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.Where(x=>x.estado==true).ToListAsync());
                 return res;
             }
             catch (Exception)
