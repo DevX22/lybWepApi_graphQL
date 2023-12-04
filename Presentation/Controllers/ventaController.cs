@@ -1,8 +1,11 @@
-﻿using Logic;
+﻿using AutoMapper;
+using Logic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Models.dto;
+using Models.mapperConfig;
 using Models.response;
 
 namespace Presentation.Controllers
@@ -15,6 +18,7 @@ namespace Presentation.Controllers
     {
         private readonly ventaLogic _logic = new();
         private ResponseBack _res = new();
+        private readonly IMapper _mapper = mapper.Go();
 
         [AllowAnonymous]
         [HttpGet("list")]
@@ -22,7 +26,11 @@ namespace Presentation.Controllers
         {
             try
             {
-                List<ventaModel> res = await _logic.GetAllDetailedAsync();
+                List<ventaDto> res = _mapper.Map<List<ventaDto>>(await _logic.GetAllDetailedAsync());
+                if (res == null)
+                {
+                    return NoContent();
+                }
                 return Ok(res);
             }
             catch (Exception)
@@ -32,13 +40,13 @@ namespace Presentation.Controllers
                 return BadRequest(_res);
             }
         }
-
         [HttpPost("create")]
-        public async Task<IActionResult> post([FromBody] ventaModel req)
+        public async Task<IActionResult> post([FromBody] ventaDto req)
         {
             try
             {
-                ventaModel res = await _logic.CreateAsync(req);
+                ventaModel reqSave = _mapper.Map<ventaModel>(req);
+                ventaDto res = _mapper.Map<ventaDto>(await _logic.CreateAsync(reqSave));
                 if (res.id == 0)
                 {
                     _res.DisplayMessage = "No se pudo registrar la venta";
@@ -57,11 +65,12 @@ namespace Presentation.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> put([FromBody] ventaModel req)
+        public async Task<IActionResult> put([FromBody] ventaDto req)
         {
             try
             {
-                ventaModel res = await _logic.UpdateAsync(req);
+                ventaModel reqSave = _mapper.Map<ventaModel>(req);
+                ventaDto res = _mapper.Map<ventaDto>(await _logic.UpdateAsync(reqSave));
                 _res.DisplayMessage = "Venta actualizada existosamente";
                 return Ok(_res);
             }

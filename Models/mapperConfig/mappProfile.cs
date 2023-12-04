@@ -29,6 +29,12 @@ namespace Models.mapperConfig
             CreateMap<colorProductoModel,colorProductoDto>().ReverseMap();
             CreateMap<imgProductoModel, imgProductoDto>().ReverseMap();
             CreateMap<tallaColorModel, colorProductoDto>().ReverseMap();
+            CreateMap<ventaDto, ventaModel>()
+                .ForMember(des => des.horaPedido, op => op.MapFrom(src => TimeSpan.Parse(src.horaPedido)))
+                .ForMember(des => des.horaVenta, op => op.MapFrom(src => TimeSpan.Parse(src.horaVenta)))
+                .ReverseMap()
+                .ForMember(src=>src.horaPedido, op => op.MapFrom(des=>des.horaPedido.ToString(@"hh\:mm\:ss")))
+                .ForMember(src=>src.horaVenta, op => op.MapFrom(des=>des.horaVenta.ToString(@"hh\:mm\:ss")));
         }
     }
 }

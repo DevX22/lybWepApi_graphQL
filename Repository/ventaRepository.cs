@@ -22,10 +22,11 @@ namespace Repository
         {
             try
             {
-                List<ventaModel> res = await _db.venta
-                    .Include(x=>x.Comprobante)
-                    .Include(x=>x.ProcesoVenta)
-                    .Include(x=>x.Pago).ToListAsync();
+                //List<ventaModel> res = await _db.venta
+                //    .Include(x=>x.Comprobante)
+                //    .Include(x=>x.ProcesoVenta)
+                //    .Include(x=>x.Pago).ToListAsync();
+                List<ventaModel> res = await _db.venta.ToListAsync();
                 return res;
 
             }
