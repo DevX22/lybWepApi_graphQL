@@ -17,8 +17,8 @@ namespace Models
         public Int64 id { get; set; }
         public int id_cajaDelivery { get; set; }
         public Int64 id_delivery { get; set; }
-        public Int64 id_venta { get; set; }
-        public string cliente { get; set; }
+        public Int64? id_venta { get; set; }
+        public string? cliente { get; set; }
         public decimal total { get; set; }
 
         [ForeignKey("id_cajaDelivery"),JsonIgnore]

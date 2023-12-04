@@ -16,9 +16,9 @@ namespace Models
         public int id { get; set; }
         public Int64 id_salida { get; set; }
         public int id_producto { get; set; }
-        public string producto { get; set; }
-        public int id_establecimiento { get; set; }
-        public int cantidad { get; set; }
+        public string? producto { get; set; }
+        public int? id_establecimiento { get; set; }
+        public int? cantidad { get; set; }
 
         [ForeignKey("id_salida"),JsonIgnore]
         public virtual salidaProductoModel? SalidaProducto { get; set; }

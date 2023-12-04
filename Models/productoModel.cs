@@ -20,8 +20,8 @@ namespace Models
         public string proveedor { get; set; }
         public int id_categoria {get; set;}
         public string categoria { get; set; }
-        public int id_tipoMedida {get; set;}
-        public string tipoMedida { get; set; }
+        public int? id_tipoMedida {get; set;}
+        public string? tipoMedida { get; set; }
         [MaxLength(50)]
         public string? medida { get; set; } = "0";
         [MaxLength(10)]
@@ -30,8 +30,8 @@ namespace Models
         public string? ancho { get; set; } = "0";
         [MaxLength(10)]
         public string? profundidad { get; set; } = "0";
-        public decimal precioCompra {get; set;}
-        public decimal precioVenta {get; set;}
+        public decimal? precioCompra {get; set;}
+        public decimal? precioVenta {get; set;}
         public int? stock { get; set; }
         public bool estado { get; set; }
         

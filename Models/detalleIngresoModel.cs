@@ -16,10 +16,10 @@ namespace Models
         public Int64 id { get; set; }
         public Int64 id_ingreso { get; set; }
         public int id_producto { get; set; }
-        public string producto { get; set; }
-        public decimal precioCompra { get; set; }
-        public decimal precioVenta { get; set; }
-        public int cantidad { get; set; }
+        public string? producto { get; set; }
+        public decimal? precioCompra { get; set; }
+        public decimal? precioVenta { get; set; }
+        public int? cantidad { get; set; }
 
         [ForeignKey("id_ingreso"),JsonIgnore]
         public virtual ingresoProductoModel? IngresoProducto { get; set; }

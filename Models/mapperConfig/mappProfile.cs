@@ -25,16 +25,17 @@ namespace Models.mapperConfig
                 .ForMember(d => d.nombreApellido, o => o.MapFrom(m => m.persona.nombre + " " + m.persona.apellidoPaterno));
             CreateMap<usuarioModel, userTokenDto>();
             CreateMap<usuarioModel, usuarioDto>().ReverseMap();
+            CreateMap<usuarioDto,usuarioModel>().ReverseMap();
             CreateMap<productoModel, productoDto>().ReverseMap();
             CreateMap<colorProductoModel,colorProductoDto>().ReverseMap();
             CreateMap<imgProductoModel, imgProductoDto>().ReverseMap();
             CreateMap<tallaColorModel, colorProductoDto>().ReverseMap();
             CreateMap<ventaDto, ventaModel>()
-                .ForMember(des => des.horaPedido, op => op.MapFrom(src => TimeSpan.Parse(src.horaPedido)))
-                .ForMember(des => des.horaVenta, op => op.MapFrom(src => TimeSpan.Parse(src.horaVenta)))
+                .ForMember(des => des.horaPedido, op => op.MapFrom(src =>string.IsNullOrEmpty(src.horaPedido)?(TimeSpan?)null:TimeSpan.Parse(src.horaPedido)))
+                .ForMember(des => des.horaVenta, op => op.MapFrom(src => string.IsNullOrEmpty(src.horaVenta)?(TimeSpan?)null:TimeSpan.Parse(src.horaVenta)))
                 .ReverseMap()
-                .ForMember(src=>src.horaPedido, op => op.MapFrom(des=>des.horaPedido.ToString(@"hh\:mm\:ss")))
-                .ForMember(src=>src.horaVenta, op => op.MapFrom(des=>des.horaVenta.ToString(@"hh\:mm\:ss")));
+                .ForMember(src=>src.horaPedido, op => op.MapFrom(des=>des.horaPedido==null?"":des.horaPedido.Value.ToString(@"hh\:mm\:ss")))
+                .ForMember(src=>src.horaVenta, op => op.MapFrom(des=>des.horaVenta==null?"":des.horaVenta.Value.ToString(@"hh\:mm\:ss")));
         }
     }
 }

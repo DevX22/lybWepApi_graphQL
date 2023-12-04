@@ -20,7 +20,6 @@ namespace Presentation.Controllers
         private ResponseBack _res = new();
         private readonly IMapper _mapper = mapper.Go();
 
-        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> getAll()
         {

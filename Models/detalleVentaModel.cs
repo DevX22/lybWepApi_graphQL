@@ -16,11 +16,11 @@ namespace Models
         public Int64 id { get; set; }
         public Int64 id_venta { get; set; }
         public int id_producto { get; set; }
-        public string producto { get; set; }
-        public string descripcion { get; set; }
+        public string? producto { get; set; }
+        public string? descripcion { get; set; }
         public int cantidad { get; set; }
         public decimal precio { get; set; }
-        public decimal descuento { get; set; }
+        public decimal? descuento { get; set; }
         public decimal total { get; set; }
 
         [ForeignKey("id_venta"),JsonIgnore]

@@ -15,13 +15,13 @@ namespace Models
         [Key]
         public int id { get; set; }
         public string usser { get; set; }
-        public string email { get; set; }
+        public string? email { get; set; }
         public string contrasena { get; set; }
         public int id_persona { get; set; }
         public int id_rolUsuario { get; set; }
-        public string avatar { get; set; }
-        public string direccion { get; set; }
-        public string condicion { get; set; }
+        public string? avatar { get; set; }
+        public string? direccion { get; set; }
+        public string? condicion { get; set; }
         public bool estado { get; set; }
 
         [ForeignKey("id_persona")]

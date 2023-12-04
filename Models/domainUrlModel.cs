@@ -13,8 +13,8 @@ namespace Models
     {
         [Key]
         public int id { get; set; } = 100;
-        public string domain { get; set; }
-        public string imgDirectory { get; set; }
+        public string? domain { get; set; }
+        public string? imgDirectory { get; set; }
 
     }
 }

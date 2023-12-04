@@ -13,6 +13,6 @@ namespace Models
     {
         [Key]
         public int id { get; set; } = 1;
-        public int minutos { get; set; }
+        public int? minutos { get; set; }
     }
 }

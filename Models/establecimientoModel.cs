@@ -14,9 +14,9 @@ namespace Models
         [Key]
         public int id { get; set; }
         public string establecimiento { get; set; }
-        public string direccion { get; set; }
-        public decimal origenLat { get; set; }
-        public decimal origenLng { get; set; }
+        public string? direccion { get; set; }
+        public decimal? origenLat { get; set; }
+        public decimal? origenLng { get; set; }
         public bool estado { get; set; }
     }
 }

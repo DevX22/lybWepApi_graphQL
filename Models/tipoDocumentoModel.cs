@@ -13,7 +13,7 @@ namespace Models
     {
         [Key]
         public int id { get; set; }
-        public byte maxCaracteres { get; set; }
+        public byte? maxCaracteres { get; set; }
         public string tipoDocumento { get; set; }
     }
 }

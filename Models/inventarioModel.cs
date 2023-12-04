@@ -14,13 +14,13 @@ namespace Models
     {
         [Key]
         public int id { get; set; }
-        public int id_establecimiento { get; set; }
-        public string establecimiento { get; set; }
+        public int? id_establecimiento { get; set; }
+        public string? establecimiento { get; set; }
         public int id_producto { get; set; }
         public string producto { get; set; }
-        public int undIngresadas { get; set; }
-        public int undVendidas { get; set; }
-        public int totalStock { get; set; }
+        public int? undIngresadas { get; set; }
+        public int? undVendidas { get; set; }
+        public int? totalStock { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]
         public virtual productoModel? productoModel { get; set; }

@@ -13,7 +13,7 @@ namespace Models
     {
         [Key]
         public int id { get; set; }
-        public int ordenProceso { get; set; }
+        public int? ordenProceso { get; set; }
         public string proceso { get; set; }
     }
 }

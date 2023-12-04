@@ -14,9 +14,9 @@ namespace Models
         [Key]
         public int id { get; set; }
         public int id_usuario { get; set; }
-        public string usuario { get; set; }
-        public int id_establecimiento { get; set; }
-        public string establecimiento { get; set; }
+        public string? usuario { get; set; }
+        public int? id_establecimiento { get; set; }
+        public string? establecimiento { get; set; }
         public DateTime fecha { get; set; }
     }
 }

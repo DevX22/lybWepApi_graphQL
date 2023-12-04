@@ -27,11 +27,11 @@ namespace Presentation.Controllers
             }
             catch (Exception)
             {
-                _res.DisplayMessage = "Ocurrio un problema";
-                _res.isSuccess = false;
-                return BadRequest(_res);
+                throw;
+                //_res.DisplayMessage = "Ocurrio un problema";
+                //_res.isSuccess = false;
+                //return BadRequest(_res);
             }
-
         }
 
         [HttpPost("create")]

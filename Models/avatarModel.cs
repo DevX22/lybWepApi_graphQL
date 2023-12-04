@@ -13,7 +13,7 @@ namespace Models
     {
         [Key]
         public int id { get; set; }
-        public string nombreAvatar { get; set; }
+        public string? nombreAvatar { get; set; }
         public string imgAvatar { get; set; }
     }
 }

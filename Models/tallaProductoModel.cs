@@ -10,8 +10,8 @@ namespace Models
         [Key]
         public int id { get; set; }
         public int id_producto { get; set; }
-        public int stock { get; set; }
-        public string talla { get; set; }
+        public int? stock { get; set; }
+        public string? talla { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]
         public virtual productoModel? producto { get; set; }

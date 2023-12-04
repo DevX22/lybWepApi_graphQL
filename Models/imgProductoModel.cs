@@ -15,7 +15,7 @@ namespace Models
         [Key]
         public Int64 id  { get; set; }
         public int id_producto { get; set; }
-        public string nombreImg { get; set; }
+        public string? nombreImg { get; set; }
         public string? imgUrl { get; set; }
 
         [ForeignKey("id_producto"),JsonIgnore]

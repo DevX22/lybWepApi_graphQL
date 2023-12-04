@@ -19,8 +19,8 @@ namespace Models
         public string tipoComprobante { get; set; }
         public string serieComprobante { get; set; }
         public string numeroComprobante { get; set; }
-        public DateTime fechaPedido { get; set; }
-        public TimeSpan horaPedido { get; set; }
+        public DateTime? fechaPedido { get; set; }
+        public TimeSpan? horaPedido { get; set; }
         public int id_tipoPago { get; set; }
         public string tipoPago { get; set; }
         public decimal subTotal { get; set; }
@@ -30,8 +30,8 @@ namespace Models
         public decimal total { get; set; }
         public int id_proceso { get; set; }
         public string proceso { get; set; }
-        public DateTime fechaVenta { get; set; }
-        public TimeSpan horaVenta { get; set; }
+        public DateTime? fechaVenta { get; set; }
+        public TimeSpan? horaVenta { get; set; }
 
         //[ForeignKey("id_tipoComprobante"),JsonIgnore]
         //public virtual  tipoComprobanteModel Comprobante { get; set; }
