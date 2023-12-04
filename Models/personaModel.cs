@@ -17,13 +17,13 @@ namespace Models
         [Key]
         public int id { get; set; }
         public string nombre { get; set; }
-        public string apellidoPaterno { get; set; }
+        public string? apellidoPaterno { get; set; }
         public string? apellidoMaterno { get; set; }
-        public string tipoDocumento { get; set; }
+        public string? tipoDocumento { get; set; }
         [MaxLength(12)]
-        public string numeroDocumento { get; set; }
+        public string? numeroDocumento { get; set; }
         [MaxLength(9)]
-        public string celular { get; set; }
+        public string? celular { get; set; }
         [MaxLength(9)]
         public string? whatsApp { get; set; }
         public string? correo { get; set; }

@@ -11,9 +11,11 @@ namespace Models.dto
     {
         public int id { get; set; }
         public string usser { get; set; }
-        public string direccionEnvio { get; set; }
-        public string direccionCasa { get; set; }
-        public string avatar { get; set; }
+        public string? direccionEnvio { get; set; }
+        public decimal? destinoLat { get; set; }
+        public decimal? destinoLng { get; set; }
+        public string? direccionCasa { get; set; }
+        public string? avatar { get; set; }
         public int id_persona { get; set; }
         public bool estado { get; set; }
 
