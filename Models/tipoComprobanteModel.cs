@@ -14,6 +14,7 @@ namespace Models
         [Key]
         public int id { get; set; }
         public string comprobante { get; set; }
+        public string abrev { get; set; }
 
     }
 }

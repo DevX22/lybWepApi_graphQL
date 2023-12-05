@@ -22,9 +22,8 @@ namespace Repository
         {
             try
             {
-                List<detalleVentaModel> res = await _db.detalleVenta.Where(x=>x.id_producto==id).ToListAsync();
+                List<detalleVentaModel> res = await _db.detalleVenta.Where(x=>x.id_venta==id).ToListAsync();
                 return res;
-
             }
             catch (Exception ex)
             {
@@ -32,6 +31,5 @@ namespace Repository
                 throw exx;
             }
         }
-
     }
 }
