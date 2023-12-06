@@ -7,6 +7,7 @@ using Models;
 using Models.dto;
 using Models.mapperConfig;
 using Models.request;
+using Models.response;
 using Newtonsoft.Json.Linq;
 
 namespace Presentation.Controllers
@@ -17,6 +18,7 @@ namespace Presentation.Controllers
     public class productoController : ControllerBase
     {
         private readonly productoLogic _logic = new productoLogic();
+        private readonly ResponseBack _res = new();
         private readonly ILogger<productoController> _logger;
         private readonly IMapper _mapper = mapper.Go(); 
 
@@ -36,7 +38,7 @@ namespace Presentation.Controllers
                 {
                     return BadRequest();
                 }
-                return Ok(res.id);
+                return Ok(res);
             }
             catch (Exception)
             {
@@ -85,10 +87,14 @@ namespace Presentation.Controllers
             try
             {
                 productoModel res = await _logic.UpdateAsync(req);
-                return CreatedAtAction("actualizado", true);
+                _res.isSuccess = true;
+                _res.DisplayMessage = $"Producto {res.producto} actualizado";
+                return Ok(_res);
             }
             catch (Exception)
             {
+                _res.isSuccess = false;
+                _res.DisplayMessage = "error 500, Se produjo un error en el servidor";
                 throw;
             }
         }
