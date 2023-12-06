@@ -28,8 +28,5 @@ namespace Models
 
         [ForeignKey("id_producto"),JsonIgnore]
         public virtual productoModel? Producto { get; set; }
-
-
-
     }
 }

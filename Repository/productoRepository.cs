@@ -41,5 +41,43 @@ namespace Repository
                 throw;
             }
         }
+
+        public async Task<bool> updateStockMulti(List<detalleVentaModel> req)
+        {
+            //using (var transaction = await _db.Database.BeginTransactionAsync())
+            //{
+
+            //}
+            try
+            {
+                foreach (var venta in req)
+                {
+                    productoModel producto = await _db.producto.FindAsync(venta.id_producto);
+                    if (producto != null)
+                    {
+                        if (producto.stock >= venta.cantidad)
+                        {
+                            producto.stock -= venta.cantidad;
+                            _db.producto.Update(producto);
+                            await _db.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
     }
 }

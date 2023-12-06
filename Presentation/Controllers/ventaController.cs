@@ -7,6 +7,7 @@ using Models;
 using Models.dto;
 using Models.mapperConfig;
 using Models.response;
+using System.Collections.Immutable;
 
 namespace Presentation.Controllers
 {
@@ -52,14 +53,15 @@ namespace Presentation.Controllers
                     _res.isSuccess = false;
                     return BadRequest(_res);
                 }
-                _res.DisplayMessage = "Venta registrada exitosamente";
-                return Ok(_res);
+                _logic.saveNumeroComprobante(res.id);
+                return Ok(res);
             }
             catch (Exception)
             {
-                _res.DisplayMessage = "Ocurrio un problema";
-                _res.isSuccess = false;
-                return BadRequest(_res);
+                //_res.DisplayMessage = "Ocurrio un problema";
+                //_res.isSuccess = false;
+                //return BadRequest(_res);
+                throw;
             }
         }
 

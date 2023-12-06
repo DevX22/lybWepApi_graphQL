@@ -1,9 +1,11 @@
-﻿using Logic;
+﻿using AutoMapper;
+using Logic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Models.dto;
+using Models.mapperConfig;
 using Models.request;
 using Newtonsoft.Json.Linq;
 
@@ -16,6 +18,7 @@ namespace Presentation.Controllers
     {
         private readonly productoLogic _logic = new productoLogic();
         private readonly ILogger<productoController> _logger;
+        private readonly IMapper _mapper = mapper.Go(); 
 
         public productoController(ILogger<productoController> logger)
         {
@@ -41,7 +44,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPost("list")]
+        [HttpPost("listDetail")]
         public async Task<IActionResult> get([FromBody] filterRequest? req)
         {
             try
@@ -53,6 +56,25 @@ namespace Presentation.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
+                throw;
+            }
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> getAll()
+        {
+            try
+            {
+                List<productoDto> res = _mapper.Map<List<productoDto>>(await _logic.GetAllAsync());
+                if (res.Count == 0)
+                {
+                    return BadRequest(res);
+                }
+                return Ok(res);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
@@ -101,6 +123,24 @@ namespace Presentation.Controllers
             {
                 _logger.LogError(ex,"Error en test: {0}", ex.Message);
                 throw ex;
+            }
+        }
+        [HttpPost("update/stock")]
+        public async Task<IActionResult> updateStock(List<detalleVentaModel> req)
+        {
+            try
+            {
+                bool res = await _logic.updateStockMulti(req);
+                if (res == false)
+                {
+                    return NoContent();
+                }
+                return Ok(res);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

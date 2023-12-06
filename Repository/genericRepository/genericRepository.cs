@@ -56,7 +56,7 @@ namespace Repository.genericRepository
         {
             try
             {
-                return _dbSet.Find();
+                return _dbSet.Find(id);
             }
             catch (Exception ex)
             {

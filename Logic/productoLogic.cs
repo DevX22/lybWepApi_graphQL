@@ -20,6 +20,7 @@ namespace Logic
         private readonly colorProductoLogic _dbColor = new colorProductoLogic();
         private readonly tallaProductoLogic _dbTallaProd = new tallaProductoLogic();
         private readonly tallaColorLogic _dbTallaColor = new tallaColorLogic();
+        private readonly _dbContextProducto _dbContexAlter = new();
         private readonly IMapper _map = mapper.Go();
 
 
@@ -28,8 +29,40 @@ namespace Logic
             GC.SuppressFinalize(this);
         }
 
+        //public async Task<List<productoDto>> listAllAsyncOptimo(filterRequest filterReq)
+        //{
+        //    List<productoDto> res = await listFrontAsync();
+
+        //    if (res != null)
+        //    {
+        //        await Task.WhenAll(res.Select(async producto =>
+        //        {
+        //            producto.imgProducto = _map.Map<List<imgProductoDto>>(await _dbImg.GetByProductIdAsync(producto.id));
+
+        //            if (producto.tipoMedida != "talla")
+        //            {
+        //                producto.colorProducto = _map.Map<List<colorProductoDto>>(await _dbColor.GetByProductIdAsync(producto.id));
+        //            }
+        //            else
+        //            {
+        //                producto.colorProducto = new List<colorProductoDto>();
+
+        //                var tallas = await _dbTallaProd.GetByProductIdAsync(producto.id);
+        //                var colorsAllTasks = tallas.Select(async talla => await _dbTallaColor.GetByTallaIdAsync(talla.id));
+        //                var colorsAll = (await Task.WhenAll(colorsAllTasks)).SelectMany(x => x).ToList();
+
+        //                var distinctColors = colorsAll.GroupBy(x => x.colorCode).Select(g => g.First()).ToList();
+        //                producto.colorProducto = _map.Map<List<colorProductoDto>>(distinctColors);
+        //            }
+        //        })).ConfigureAwait(false);
+        //    }
+
+        //    return res;
+        //}
+
         public async Task<List<productoDto>> listAllAsync(filterRequest filterReq)
         {
+
             List<productoDto> res = await listFrontAsync();
             if (res != null)
             {
@@ -76,56 +109,6 @@ namespace Logic
                         }
                     }
                 }
-                ////filters
-                //List<productoDto> productoFilter = new();
-
-                //if (filterReq == null)
-                //{
-                //    return res;
-                //}
-
-                //if (filterReq.categorias != null && filterReq.categorias[0] != null && filterReq.categorias.Count > 0)
-                //{
-                //    foreach (var categoria in filterReq.categorias)
-                //    {
-                //        var producto = from prod in res
-                //                       where prod.id_categoria == categoria.id
-                //                       select prod;
-                //        if (producto.Count() > 0)
-                //        {
-                //            productoFilter.AddRange(producto);
-                //        }
-                //    }
-                //    res = productoFilter;
-                //}
-                //if (filterReq.isOrderByAZ == true)
-                //{
-                //    var produts = from prod in res
-                //                  orderby prod.producto ascending
-                //                  select prod;
-                //    res = produts.ToList();
-                //}
-                //else if (filterReq.isOrderByZA == true)
-                //{
-                //    var produts = from prod in res
-                //                  orderby prod.producto descending
-                //                  select prod;
-                //    res = produts.ToList();
-                //}
-                //else if (filterReq.isOrderByMenorMayor == true)
-                //{
-                //    var produts = from prod in res
-                //                  orderby prod.precioVenta ascending
-                //                  select prod;
-                //    res = produts.ToList();
-                //}
-                //else if (filterReq.isOrderByMayorMenor == true)
-                //{
-                //    var produts = from prod in res
-                //                  orderby prod.precioVenta descending
-                //                  select prod;
-                //    res = produts.ToList();
-                //}
             }
             return res;
         }
