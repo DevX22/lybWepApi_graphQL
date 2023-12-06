@@ -52,5 +52,23 @@ namespace Presentation.Controllers
                 throw;
             }
         }
+        [HttpPost("delete")]
+        public async Task<IActionResult> delete([FromBody]deleteImgRequest req)
+        {
+            try
+            {
+                bool res = await _up.deleteImg(req);
+                if (res == false)
+                {
+                    return NoContent();
+                }
+                return Ok(res);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

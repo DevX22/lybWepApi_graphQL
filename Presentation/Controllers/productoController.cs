@@ -44,7 +44,6 @@ namespace Presentation.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpPost("listDetail")]
         public async Task<IActionResult> get([FromBody] filterRequest? req)
         {

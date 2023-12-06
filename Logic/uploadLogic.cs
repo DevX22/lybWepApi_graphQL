@@ -16,6 +16,7 @@ namespace Logic
     {
 		private readonly uploadRepository _up = new();
         private readonly domainUrlRepository _dom = new();
+        private readonly imgProductoLogic _imgProducto = new();
 
         public async Task<uploadResponse> img(string category, IFormFile file)
         {
@@ -28,6 +29,33 @@ namespace Logic
             catch (Exception)
             {
                 throw new Exception("Error al validar la imagen: " + file.FileName);
+            }
+        }
+        public async Task<bool> deleteImg(deleteImgRequest req)
+        {
+            try
+            {
+                string ruta = "";
+                (string dom, string directory) = await _dom.Get();
+                directory = directory.Substring(0, 2);
+                ruta = directory + req.url.Replace("/", "\\");
+                bool res = await _up.deleteImg(ruta);
+                if(res==false)
+                {
+                    return false;
+                }
+                int delete = _imgProducto.Delete(req.id);
+                if (delete == 0)
+                {
+                    return false;
+                }
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         public async Task<productUploadResponse> productImg(productUploadRequest req)

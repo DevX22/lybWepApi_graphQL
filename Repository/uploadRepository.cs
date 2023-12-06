@@ -29,5 +29,22 @@ namespace Repository
                 throw new Exception("Error al guardar la imagen: "+file.FileName );
             }
         }
+
+        public async Task<bool> deleteImg(string ruta)
+        {
+            try
+            {
+                if (File.Exists(ruta))
+                {
+                    File.Delete(ruta);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al eliminar imagen en la ruta: "+ruta);
+            }
+        }
     }
 }
