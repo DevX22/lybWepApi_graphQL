@@ -38,13 +38,13 @@ namespace Logic
                 string ruta = "";
                 (string dom, string directory) = await _dom.Get();
                 directory = directory.Substring(0, 2)+req.url;
-                ruta = directory + req.url.Replace("/", @"\");
+                ruta = directory + req.url.Replace("/", "\\");
                 bool res = await _up.deleteImg(ruta);
                 if(res==false)
                 {
                     return false;
                 }
-                int delete = _imgProducto.Delete(req.id);
+                int delete = await _imgProducto.DeleteAsync(req.id);
                 if (delete == 0)
                 {
                     return false;

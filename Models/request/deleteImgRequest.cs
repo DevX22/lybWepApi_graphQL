@@ -8,7 +8,7 @@ namespace Models.request
 {
     public class deleteImgRequest
     {
-        public int id { get; set; }
+        public long id { get; set; }
         public string url { get; set; }
     }
 }

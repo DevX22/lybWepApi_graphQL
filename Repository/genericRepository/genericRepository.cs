@@ -154,6 +154,21 @@ namespace Repository.genericRepository
             }
         }
 
+        public virtual async Task<int> DeleteAsync(object id)
+        {
+            try
+            {
+                TEntity entityToDelete = await _dbSet.FindAsync(id);
+                _dbSet.Remove(entityToDelete);
+                return await _db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                CustomException exx = new CustomException("Error al eliminar", (int)HttpStatusCode.InternalServerError, 500, "No Controlado", ex);
+                throw exx;
+            }
+        }
+
         public virtual int updateMultipleItems(List<TEntity> lista)
         {
             try
