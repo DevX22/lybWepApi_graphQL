@@ -37,8 +37,8 @@ namespace Logic
             {
                 string ruta = "";
                 (string dom, string directory) = await _dom.Get();
-                directory = directory.Substring(0, 2);
-                ruta = directory + req.url.Replace("/", "\\");
+                directory = directory.Substring(0, 2)+req.url;
+                ruta = directory + req.url.Replace("/", @"\");
                 bool res = await _up.deleteImg(ruta);
                 if(res==false)
                 {
