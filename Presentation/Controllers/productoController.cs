@@ -46,12 +46,15 @@ namespace Presentation.Controllers
             }
         }
 
+
+        [AllowAnonymous]
+
         [HttpPost("listDetail")]
-        public async Task<IActionResult> get([FromBody] filterRequest? req)
+        public async Task<IActionResult> get()
         {
             try
             {
-                List<productoDto> res = await _logic.listAllAsync(req);
+                List<productoDto> res = await _logic.listAllAsync();
                 _logger.LogInformation("lista de productos entregado con exito");
                 return Ok(res);
             }

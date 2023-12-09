@@ -34,15 +34,20 @@ namespace Models
         public decimal? precioVenta {get; set;}
         public int? stock { get; set; }
         public bool estado { get; set; }
-        
 
-        [ForeignKey("id_proveedor"),JsonIgnore]
-        public virtual proveedorModel? Proveedor { get; set; }
+        public virtual List<imgProductoModel>? imgProducto { get; set; }
 
-        [ForeignKey("id_categoria"),JsonIgnore]
-        public virtual categoriaModel? Categoria { get; set; }
+        public virtual List<colorProductoModel>? colorProducto { get; set; }
 
-        [ForeignKey("id_tipoMedida"),JsonIgnore]
-        public virtual tipoMedidaModel? TipoMedida { get; set; }
+        public virtual List<tallaProductoModel>? tallaProducto { get; set; }
+
+        //[ForeignKey("id_proveedor"),JsonIgnore]
+        //public virtual proveedorModel? Proveedor { get; set; }
+
+        //[ForeignKey("id_categoria"),JsonIgnore]
+        //public virtual categoriaModel? Categoria { get; set; }
+
+        //[ForeignKey("id_tipoMedida"),JsonIgnore]
+        //public virtual tipoMedidaModel? TipoMedida { get; set; }
     }
 }

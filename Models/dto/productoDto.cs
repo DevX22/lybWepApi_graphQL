@@ -26,5 +26,6 @@ namespace Models.dto
         public bool estado { get; set; }
         public virtual List<colorProductoDto>? colorProducto { get; set; }
         public virtual List<imgProductoDto>? imgProducto { get; set; }
+        public virtual List<tallaProductoDto>? TallaProducto { get; set; }
     }
 }

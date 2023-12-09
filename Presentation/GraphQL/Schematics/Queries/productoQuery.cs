@@ -12,9 +12,9 @@ namespace Presentation.GraphQL.Schematics.Queries
     {
         private readonly productoLogic _logic = new();
 
-        public async Task<List<productoDto>> Productos(filterRequest req)
+        public async Task<List<productoDto>> Productos()
         {
-            List<productoDto> res = await _logic.listAllAsync(req);
+            List<productoDto> res = await _logic.listAllAsync();
             return res;
         }
     }

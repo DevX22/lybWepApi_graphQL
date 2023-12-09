@@ -18,7 +18,7 @@ namespace Models
         public string? nombreImg { get; set; }
         public string? imgUrl { get; set; }
 
-        [ForeignKey("id_producto"),JsonIgnore]
+        [ForeignKey("id_producto"), JsonIgnore]
         public virtual productoModel? Producto { get; set; }
     }
 }

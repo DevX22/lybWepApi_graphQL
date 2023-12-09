@@ -15,5 +15,7 @@ namespace Models
 
         [ForeignKey("id_producto"),JsonIgnore]
         public virtual productoModel? producto { get; set; }
+
+        public virtual List<tallaColorModel>? colorTalla { get; set; }
     }
 }

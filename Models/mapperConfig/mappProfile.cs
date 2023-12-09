@@ -30,6 +30,7 @@ namespace Models.mapperConfig
             CreateMap<colorProductoModel,colorProductoDto>().ReverseMap();
             CreateMap<imgProductoModel, imgProductoDto>().ReverseMap();
             CreateMap<tallaColorModel, colorProductoDto>().ReverseMap();
+            CreateMap<tallaProductoModel, tallaProductoDto>().ReverseMap();
             CreateMap<ventaDto, ventaModel>()
                 .ForMember(des => des.horaPedido, op => op.MapFrom(src =>string.IsNullOrEmpty(src.horaPedido)?(TimeSpan?)null:TimeSpan.Parse(src.horaPedido)))
                 .ForMember(des => des.horaVenta, op => op.MapFrom(src => string.IsNullOrEmpty(src.horaVenta)?(TimeSpan?)null:TimeSpan.Parse(src.horaVenta)))

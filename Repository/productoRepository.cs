@@ -20,7 +20,11 @@ namespace Repository
         {
             try
             {
-                List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.Where(x=>x.estado==true).ToListAsync());
+                List<productoDto> res = _map.Map<List<productoDto>>(await _db.producto.Where(x=>x.estado==true)
+                    .Include(x=>x.imgProducto)
+                    .Include(x=>x.colorProducto)
+                    .Include(x=>x.tallaProducto)
+                    .ToListAsync());
                 return res;
             }
             catch (Exception)

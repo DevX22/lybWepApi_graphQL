@@ -60,57 +60,22 @@ namespace Logic
         //    return res;
         //}
 
-        public async Task<List<productoDto>> listAllAsync(filterRequest filterReq)
+        public async Task<List<productoDto>> listAllAsync()
         {
-
-            List<productoDto> res = await listFrontAsync();
-            if (res != null)
+            try
             {
-                foreach (productoDto producto in res)
+                List<productoDto> res = await listFrontAsync();
+                if (res != null)
                 {
-                    producto.imgProducto = _map.Map<List<imgProductoDto>>(await _dbImg.GetByProductIdAsync(producto.id));
-                    if (producto.tipoMedida != "talla")
-                    {
-                        producto.colorProducto = _map.Map<List<colorProductoDto>>(await _dbColor.GetByProductIdAsync(producto.id));
-                    }
-                    else
-                    {
-                        List<string> colorsAdd = new();
-                        int TotColors = 0;
-                        producto.colorProducto = new();
-                        List<tallaColorModel> colorsAll = new();
-                        List<tallaProductoModel> tallas = await _dbTallaProd.GetByProductIdAsync(producto.id);
-                        foreach (tallaProductoModel talla in tallas)
-                        {
-                            colorsAll.AddRange(await _dbTallaColor.GetByTallaIdAsync(talla.id));
-                        }
-                        foreach (tallaColorModel colorAll in colorsAll)
-                        {
-                            bool state = false;
-                            if (TotColors == 0)
-                            {
-                                producto.colorProducto.Add(_map.Map<colorProductoDto>(colorAll));
-                                colorsAdd.Add(colorAll.colorCode);
-                                TotColors++;
-                            };
-                            for (int i = 0; i < TotColors; i++)
-                            {
-                                if (colorsAdd[i] == colorAll.colorCode)
-                                {
-                                    state = true;
-                                }
-                            }
-                            if (!state)
-                            {
-                                producto.colorProducto.Add(_map.Map<colorProductoDto>(colorAll));
-                                colorsAdd.Add(colorAll.colorCode);
-                                TotColors++;
-                            }
-                        }
-                    }
+                    return res;
                 }
+                return res;
             }
-            return res;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public async Task<productoDto> getByIdDetailAsync(int id)
